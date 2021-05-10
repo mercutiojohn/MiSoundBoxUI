@@ -144,10 +144,10 @@ export default {
     flex-direction: column;
   }
   .dynamic-left {
-    zoom: 0.8;
+    /* zoom: 0.8; */
     height: max-content;
     margin: 0;
-    margin: 0 0 10px;
+    /* margin: 0 0 10px; */
     pointer-events: none;
     border-radius: 8px;
   }

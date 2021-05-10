@@ -1,15 +1,5 @@
 <template>
   <div class="embed">
-    <iframe
-      :class="{ 'embed-frame': true, 'embed-frame-hidden': !expand }"
-      :style="{ 'height': height, 'zoom':zoom }"
-      :src="url"
-      frameborder="0"
-      allow="autoplay *; encrypted-media *; geolocation; microphone; camera"
-      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-      scrolling="auto"
-    >
-    </iframe>
     <div class="embed-bottom-bar">
       <span class="embed-title">{{ title }}</span>
       <div class="embed-icon-group">
@@ -36,6 +26,16 @@
         </div>
       </div>
     </div>
+    <iframe
+      :class="{ 'embed-frame': true, 'embed-frame-hidden': !expand }"
+      :style="{ 'height': height, 'zoom':zoom }"
+      :src="url"
+      frameborder="0"
+      allow="autoplay *; encrypted-media *; geolocation; microphone; camera"
+      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+      scrolling="auto"
+    >
+    </iframe>
   </div>
 </template>
 
