@@ -304,7 +304,7 @@ export default {
 :root {
   --audio-player-width: 400px;
   --audio-player-height: 90px;
-  --audio-content-height: calc(var(--audio-player-height) - 6px * 2);
+  --audio-content-height: calc(100vh - 250px);
 }
 #player {
   display: flex;
@@ -337,10 +337,10 @@ export default {
   padding: 20px;
 }
 .player-cover {
-  width: calc(100vh - 250px);
+  width: var(--audio-content-height);
   /* height: max-content; */
   /* min-height: var(--audio-content-width); */
-  height: calc(100vh - 250px);
+  height: var(--audio-content-height);
   /* max-width: var(--); */
   background: var(--first-assist-color);
   border-radius: 10px;
@@ -351,7 +351,7 @@ export default {
   flex-shrink: 0;
 }
 .player-cover:hover {
-  transform: scale(1.05);
+  /* transform: scale(1.05); */
   transition: all 0.2s cubic-bezier(0.34, 0.07, 0, 0.87);
 }
 .player-cover:active {
@@ -367,10 +367,10 @@ export default {
 .player-expanded-content {
   z-index:100000;
   position:absolute;
-  bottom:0;
-  left:0;
+  top:calc(var(--audio-content-height) + 20px);
+  left:20px;
   background: #fff;
-  width: 50vw;
+  /* width: 50vw; */
   margin:10px;
   border-radius: 10px;
   display: flex;
