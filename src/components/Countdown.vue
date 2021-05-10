@@ -2,7 +2,7 @@
   <div id="countdown">
 
     
-    <div class="countdown-header">
+    <!-- <div class="countdown-header">
       <div :class="{'countdown-closed':true,'countdown-closed-hidden':expand}">
         <div class="countDown-title">{{ year }} 考研</div>
         <div class="countdown-closed-days">
@@ -20,13 +20,12 @@
         }"
       ></i>
     </div>
-    </div>
+    </div> -->
     <div :class="{'countdown-expanded':true,'countdown-expanded-hidden':!expand}">
-      <div class="countDown-title">距离 {{ year }} 考研</div>
       <div class="countdown-days">
-        {{ days }}
+        {{ days }}<span class="countDown-label">天</span>
       </div>
-      <div id="countDown-title">天</div>
+      <div class="countDown-title"> {{ year }} 考研</div>
     </div>
     
   </div>
@@ -100,15 +99,22 @@ export default {
 
 <style>
 #countdown {
-  color: var(--main-color);
+  /* color: var(--main-color); */
   display: flex;
   flex-direction: column;
   transition: all .2s ease;
+  background: linear-gradient(-45deg, rgb(247, 21, 115) , rgb(132, 0, 255) );
+  background: linear-gradient(-45deg, rgb(21, 247, 198) , rgb(132, 0, 255) );
+  background: linear-gradient(-45deg, rgb(21, 247, 198) , rgb(190, 204, 0) );
+  
+  color: #fff;
+  height: 100%;
 }
 .countdown-days {
   font-size: 80px;
   font-family: Mitype2018-90, Mitype2018-60, Politica, Palatino, Caecilia,
     Bookerly;
+  padding: 0 0 10px 0;
 }
 .countdown-expand {
   /* position:relative;
@@ -151,9 +157,9 @@ export default {
 .countdown-expanded {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0 25px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px 0 0 20px;
   overflow: hidden;
   max-height: 200px;
   transition: all .3s;
@@ -163,10 +169,18 @@ export default {
   padding: 0;
   opacity: 0;
 }
-.countdown-closed-days {
+/* .countdown-closed-days {
   font-size: 25px;
   font-family: Mitype2018-90, Politica, Mitype2018-60, Palatino, Caecilia,
     Bookerly;
   margin: 0 5px 5px;
+} */
+.countDown-label{
+  font-size: 30px;
+
+}
+.countDown-title{
+  font-size: 20px;
+  
 }
 </style>

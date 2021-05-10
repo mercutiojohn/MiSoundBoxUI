@@ -5,15 +5,7 @@
       :class="{'clockbox-time-active':clockWrapDisplay}"
       v-on:click="changeWrapState('display')"
     >
-      <span class="clockbox-open-icon"
-        ><i
-          :class="{
-            iconfont: true,
-            'icon-chevron-right': clockWrapDisplay,
-            'icon-chevron-left': !clockWrapDisplay,
-          }"
-        ></i
-      ></span>
+      
       <!-- <span
         id="clockbox-week"
         :class="bgStatus ? 'bg-text-style' : '' + handleBgOn()"
@@ -22,17 +14,27 @@
         <span id="digits">{{ week }}</span
         >周
       </span> -->
+      
+      <span
+        id="clockbox-time-content"
+        :class="bgStatus ? 'bg-text-style' : '' + handleBgOn()"
+        >{{ date }}</span
+      >
       <span
         id="clockbox-twelve-label"
         v-if="clockPreferences.twelveFormat"
         :class="bgStatus ? 'bg-text-style' : '' + handleBgOn()"
         >{{ clockPreferences.twelveLabel }}</span
       >
-      <span
-        id="clockbox-time-content"
-        :class="bgStatus ? 'bg-text-style' : '' + handleBgOn()"
-        >{{ date }}</span
-      >
+      <span class="clockbox-open-icon"
+        ><i
+          :class="{
+            iconfont: true,
+            'icon-chevron-right': !clockWrapDisplay,
+            'icon-chevron-left': clockWrapDisplay,
+          }"
+        ></i
+      ></span>
     </div>
     <transition name="trans">
       <div
@@ -49,9 +51,16 @@
             ><i class="iconfont icon-switch"></i></span> -->
         </div>
         <div id="clockbox-calendar-container" class="">
-          <div class="card-frame"><Player /></div>
+          <!-- <div class="card-frame"><Player /></div>
           <div class="card-frame">
             <TVNoise />
+          </div> -->
+          <div class="card-frame">
+            <EmbedFrame
+            url="https://www.dida365.com/webapp/#q/all/today"
+            title="滴答清单"
+            height="calc(100vh - 90px)"
+          />
           </div>
           <!-- <div class="card-frame">
           <iframe
@@ -70,14 +79,12 @@
   </div>
 </template>
 <script>
-import Player from "@/components/Player";
-import TVNoise from "@/components/arts/TVNoise";
+import EmbedFrame from "@/components/EmbedFrame";
 export default {
   props: ["bgEnable"],
   name: "ClockBox",
   components: {
-    Player,
-    TVNoise,
+    EmbedFrame
   },
   data() {
     return {
@@ -226,6 +233,7 @@ export default {
 }
 #clockbox-space {
   height: var(--headbar-height);
+  height: 0;
   /* width: 100%; */
   display: flex;
   align-items: center;
@@ -262,7 +270,7 @@ export default {
   border-radius: 5px;
 }
 #clockbox-time:hover{
-  background: #80808054;
+  /* background: #80808054; */
 }
 #clockbox-time:active{
   background: #80808098;
@@ -293,8 +301,9 @@ export default {
   max-width: 100vw;
   width: 400px;
   height: 100vh;
-  background: var(--blur-color);
-  backdrop-filter: blur(120px) saturate(200%);
+  background: var(--elem-color);
+  background: var(--first-assist-color);
+  /* backdrop-filter: blur(120px) saturate(200%); */
   position: fixed;
   top: 0;
   right: 0;
@@ -337,7 +346,7 @@ export default {
 .icon:hover {
   background: #ffffff45;
 }
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   #clockbox-wrap {
     position: fixed;
     top: calc(-100vh + 64px);
@@ -361,5 +370,5 @@ export default {
     display: none;
   }
   
-}
+} */
 </style>

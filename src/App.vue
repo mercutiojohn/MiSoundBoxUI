@@ -16,7 +16,7 @@ import HeaderBar from "@/components/HeaderBar";
 export default {
   name: "App",
   components: {
-    HeaderBar,
+    HeaderBar
   },
   mounted() {
     const script = document.createElement('script')

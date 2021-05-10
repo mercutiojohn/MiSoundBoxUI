@@ -1,20 +1,17 @@
 <template>
   <div :class="{'header-bar-container':true,'header-bar-container-bgon':bgEnable, 'header-bar-container-bg-no-blur':clockBoxStat&&bgEnable}">
-    <ul class="header-bar-tablist"  @click="printPath()">
+    <!-- <ul class="header-bar-tablist"  @click="printPath()">
       <router-link to="/">
         <li :class="{'header-bar-tabitem':true,'header-bar-tabitem-bgon':bgEnable,'header-bar-tabitem-active':currTab == '/'}">首页</li>
       </router-link>
       <router-link :to="item.url" v-for="(item,index) in navs" :key="index">
         <li :class="{'header-bar-tabitem':true,'header-bar-tabitem-bgon':bgEnable,'header-bar-tabitem-active':currTab == item.url}">{{item.name}}</li>
       </router-link>
-      <!-- <router-link to="/classic">
-        <li :class="'header-bar-tabitem'+handleChangeFontColor()">经典</li>
-      </router-link> -->
 
-    </ul>
-    <SearchBar :bgEnable="bgEnable"/>
+    </ul> -->
     <div class="header-bar-right">
       <ClockBox :bgEnable="bgEnable"/>
+      <!-- <a href="settings://">123</a> -->
     </div>
     
   </div>
@@ -22,26 +19,23 @@
  
 <script>
 import ClockBox from '@/components/ClockBox'
-import SearchBar from '@/components/SearchBar'
 
 
 export default {
   name: "HeaderBar",
   components: {
-    ClockBox,
-    SearchBar
+    ClockBox
   },
   data() {
     return {
       bgEnable:false,
       navs:[
         {
-        name:"工具",
-        url:"/utils"
-      },
-      {
-        name:"视频教程",
-        url:"/course"
+        name:"首页",
+        url:"/"
+      },{
+        name:"测试",
+        url:"/test"
       }]
     };
   },
@@ -100,7 +94,6 @@ export default {
 .header-bar-container {
   box-sizing: border-box;
   user-select: none;
-  padding: 20px 30px 20px 30px;
   position: sticky;
   top: 0px;
   display: flex;
@@ -108,7 +101,7 @@ export default {
   align-items: center;
   z-index:1000;
   transition: all .6s ease;
-  padding: 5px 30px 5px 30px;
+  padding: 5px 10px;
   /* background: linear-gradient(var(--elem-color),transparent); */
   height: 64px;
 }
@@ -172,30 +165,5 @@ export default {
 }
 .header-bar-right{
   display: flex;
-}
-@media screen and (max-width: 600px){
-  .header-bar-container{
-    position: fixed;
-    top:unset;
-    bottom: 0;
-    height: 64px;
-    left: 0;
-    background: var(--blur-color);
-    backdrop-filter: blur(40px) saturate(120%);
-  }
-  .header-bar-tablist{
-    /* display: none; */
-  }
-  #clockbox{
-    /* display: none; */
-
-  }
-  
-}
-@media screen and (max-width: 1020px)and (min-width: 600px){
-  .header-bar-tablist{
-    width: 0;
-    overflow: hidden;
-  }
 }
 </style>

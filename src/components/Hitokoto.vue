@@ -62,8 +62,15 @@ export default {
 </script>
 
 <style>
+.hitokoto{
+  flex:2;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-top: 30px;
+    height: 100%;
+}
 .hitokoto-box{
-  width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,7 +82,7 @@ export default {
   color: #fff;
   display: flex;
   justify-content: flex-start;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
 }
 .hitokoto-from {
@@ -83,7 +90,7 @@ export default {
     width: 100%;
   color: #fff;
   display: flex;
-justify-content: flex-start;
-    font-size: 10px;
+justify-content: flex-end;
+    font-size: 20px;
 }
 </style>

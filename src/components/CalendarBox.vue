@@ -163,6 +163,22 @@ export default {
 </script>
 
 <style>
+.calendar {
+  box-sizing: border-box;
+  font-family: Mitype2018-60, Politica, "PingFang SC", "微软雅黑", MiLan,
+    Helvetica, Futura;
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: space-between;
+  color: #fff;
+  user-select: none;
+  flex: 1;
+  width: max-content;
+  /* width:100px; */
+  flex-shrink: 0;
+}
 .block-today {
   display: block;
 }
@@ -197,19 +213,7 @@ export default {
   /* background: #eee; */
 }
 
-.calendar {
-  box-sizing: border-box;
-  font-family: Mitype2018-60, Politica, "PingFang SC", "微软雅黑", MiLan,
-    Helvetica, Futura;
-  font-weight: 800;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  color: #fff;
-  user-select: none;
-  flex: 1;
-}
+
 .week-content,
 .school-week-content {
   font-size: 20px;

@@ -2,7 +2,7 @@
   <div class="embed">
     <iframe
       :class="{ 'embed-frame': true, 'embed-frame-hidden': !expand }"
-      :style="{ height: height + 'px' }"
+      :style="{ 'height': height, 'zoom':zoom }"
       :src="url"
       frameborder="0"
       allow="autoplay *; encrypted-media *; geolocation; microphone; camera"
@@ -47,7 +47,11 @@ export default {
     title: String,
     height: {
       type: String,
-      default: '200',
+      default: '200px',
+    },
+    zoom: {
+      type: String,
+      default: '1',
     },
   },
   data() {
@@ -81,6 +85,7 @@ export default {
   height: 0!important;
 }
 .embed-bottom-bar {
+  zoom:1.5;
   box-sizing: border-box;
   width: 100%;
   display: flex;

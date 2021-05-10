@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      bgSrc: "https://source.unsplash.com/random/1920x1080",
+      bgSrc: "https://source.unsplash.com/random/800x600",
       fullscreen: false,
     };
   },
@@ -47,11 +47,11 @@ export default {
     },
     changeBackground() {
       // let a = this.$refs.bgImg;
-      if (this.bgSrc == "https://source.unsplash.com/random/1920x1080")
-        this.bgSrc = "https://source.unsplash.com/random/4096x2160";
-      else this.bgSrc = "https://source.unsplash.com/random/1920x1080";
+      if (this.bgSrc == "https://source.unsplash.com/random/800x600")
+        this.bgSrc = "https://source.unsplash.com/random/1280x800";
+      else this.bgSrc = "https://source.unsplash.com/random/800x600";
       // let a = document.querySelector("#dynamic-left-background-image");
-      // a.setAttribute('src',"https://source.unsplash.com/random/1920x1080");
+      // a.setAttribute('src',"https://source.unsplash.com/random/800x600");
     },
   },
   created() {
@@ -76,6 +76,7 @@ export default {
   box-sizing: border-box;
   height: 100%;
   display: flex;
+  background: #000;
 }
 .dynamic-left-background {
   box-sizing: border-box;
@@ -106,7 +107,8 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 2;
-  background-image: radial-gradient(
+  background: #00000023;
+  /* background-image: radial-gradient(
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0.1) 100%
     ),
@@ -117,13 +119,13 @@ export default {
       rgba(0, 0, 0, 0) 0% 75%,
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0.2) 100%
-    );
+    ); */
   pointer-events: none;
 }
 .dynamic-content {
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   padding: 20px;
   position: absolute;
   left: 0;
@@ -150,7 +152,8 @@ export default {
     border-radius: 8px;
   }
   .dynamic-left-background {
-    min-height: 350px;
+    min-height: calc(100vh - 64px);
+
   }
   .dynamic-right {
     width: 100%;

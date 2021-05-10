@@ -9,15 +9,15 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 // Element UI
-import ElementUI from 'element-ui'
-Vue.use(ElementUI)
-import 'element-ui/lib/theme-chalk/index.css'
+// import ElementUI from 'element-ui'
+// Vue.use(ElementUI)
+// import 'element-ui/lib/theme-chalk/index.css'
 
 // Vant
-import Vant from 'vant'
-import 'vant/lib/index.css'
-import 'vant/lib/icon/local.css'
-import '@vant/touch-emulator'
+// import Vant from 'vant'
+// import 'vant/lib/index.css'
+// import 'vant/lib/icon/local.css'
+// import '@vant/touch-emulator'
 // Vue.use(Vant) 
 
 
@@ -34,28 +34,31 @@ Vue.prototype.$video = Video
 import '../static/icon/line-icon/iconfont.css'
 import '../static/icon/music-controls/iconfont.css'
 // jsonp
-import { VueJsonp } from 'vue-jsonp'
-Vue.use(VueJsonp)
+// import { VueJsonp } from 'vue-jsonp'
+// Vue.use(VueJsonp)
 
 // import JsonpCommon from './js/jsonp-common.js'
 // Vue.use(JsonpCommon)
 
 // GeminiScrollBar
-import GeminiScrollbar from 'vue-gemini-scrollbar'
-Vue.use(GeminiScrollbar)
+// import GeminiScrollbar from 'vue-gemini-scrollbar'
+// Vue.use(GeminiScrollbar)
 
 Vue.config.productionTip = false
 
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+
+// import style (>= Swiper 6.x)
+import 'swiper/swiper-bundle.css'
+
+Vue.use(VueAwesomeSwiper, /* { default options with global component } */ )
 
 import store from './common'
 Vue.prototype.$store = store
 
 
-import Course from '@/pages/Course'
-import HelloPage from '@/pages/HelloPage'
-import Fanya from '@/pages/Fanya'
-import Utilities from '@/pages/Utilities'
 import MobileHome from '@/pages/MobileHome'
+import SwiperPage from '@/pages/swiper-test'
 
 
 // 1. 定义 (路由) 组件。
@@ -70,28 +73,15 @@ const Test = {
 // 或者，只是一个组件配置对象。
 // 我们晚点再讨论嵌套路由。
 const routes = [{
-        path: '/course',
-        component: Course
-    },
-    {
-        path: '/test',
-        component: Test
-    },
-    {
-        path: '/utils',
-        component: Utilities
-    },
-    {
-        path: '/',
-        component: HelloPage
-    }, {
-        path: '/fanya',
-        component: Fanya
-    }, {
-        path: '/mobile',
-        component: MobileHome
-    }
-]
+    path: '/',
+    component: MobileHome
+}, {
+    path: '/test',
+    component: Test
+}, {
+    path: '/swiper',
+    component: SwiperPage
+}]
 
 // 3. 创建 router 实例，然后传 `routes` 配置
 // 你还可以传别的配置参数, 不过先这么简单着吧。
