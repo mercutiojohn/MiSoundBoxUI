@@ -14,7 +14,7 @@
             ></i>
           </div>
         </a>
-        <div class="embed-icon" @click="changeWrapState()">
+        <div class="embed-icon" @click="changeWrapState()" v-if="!hideExpand">
           <i
             :class="{
               iconfont: true,
@@ -27,7 +27,7 @@
       </div>
     </div>
     <iframe
-      :class="{ 'embed-frame': true, 'embed-frame-hidden': !expand }"
+      :class="{ 'embed-frame': true, 'embed-frame-hidden': !expand&&!hideExpand }"
       :style="{ 'height': height, 'zoom':zoom }"
       :src="url"
       frameborder="0"
@@ -52,6 +52,10 @@ export default {
     zoom: {
       type: String,
       default: '1',
+    },
+    hideExpand: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -85,7 +89,7 @@ export default {
   height: 0!important;
 }
 .embed-bottom-bar {
-  zoom:1.5;
+  zoom:1.1;
   box-sizing: border-box;
   width: 100%;
   display: flex;

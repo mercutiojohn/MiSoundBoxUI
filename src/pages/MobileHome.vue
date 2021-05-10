@@ -53,14 +53,17 @@ export default {
   data() {
     return {
       swiperOption2: {
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
+        // autoplay: {
+        //   delay: 3000,
+        //   disableOnInteraction: false,
+        // },
         loop: false,
         direction: "horizontal",
         spaceBetween: 0,
         slidesPerView: "auto",
+        keyboard: {
+        enabled: true,
+      }
       },
     };
   },
@@ -129,6 +132,7 @@ body {
   min-width: calc(100vh - 64px);
 }
 .mobile-tool-item:first-child {
+  overflow: hidden;
   /* margin: 0 0 0 20px; */
 }
 /* .mobile-tool-item:last-child{

@@ -1,24 +1,27 @@
 <template>
   <div id="all">
-    <swiper :options="swiperOption2">
-      <swiper-slide class="">
-        <HeaderBar />
-        <!-- <div id="fake"></div>  -->
-        <transition name="fade" mode="out-in">
-          <!-- <keep-alive> -->
-          <router-view></router-view>
-          <!-- </keep-alive> -->
-        </transition>
-        <!-- <Course /> -->
-      </swiper-slide>
-      <swiper-slide class="">
+    <!-- <swiper :options="swiperOption">
+      <swiper-slide> -->
+        <div class="main-page">
+          <HeaderBar />
+          <!-- <div id="fake"></div>  -->
+          <transition name="fade" mode="out-in">
+            <!-- <keep-alive> -->
+            <router-view></router-view>
+            <!-- </keep-alive> -->
+          </transition>
+          <!-- <Course /> -->
+        </div>
+      <!-- </swiper-slide>
+      <swiper-slide> -->
         <EmbedFrame
           url="https://www.dida365.com/webapp/#q/all/today"
           title="滴答清单"
-          height="calc(100vh - 70px)"
+          height="calc(100vh - 40px)"
+          :hideExpand="true"
         />
-      </swiper-slide>
-      <swiper-slide class=""></swiper-slide>
+      <!-- </swiper-slide> -->
+      <!-- <swiper-slide class=""></swiper-slide> -->
     </swiper>
   </div>
 </template>
@@ -41,16 +44,12 @@ export default {
   },
   data() {
     return {
-      swiperOption2: {
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
-        loop: false,
+      swiperOption: {
         direction: "vertical",
+        slidesPerView: 1,
+        // autoHeight: true
         spaceBetween: 0,
-        slidesPerView: "auto",
-        paginationClickable: true,
+        loop: true,
       },
     };
   },
@@ -88,8 +87,8 @@ body {
 input,
 select,
 textarea {
-    outline: none;
-    filter: chroma(color=#000000);
+  outline: none;
+  filter: chroma(color=#000000);
 }
 
 #all {
@@ -109,4 +108,9 @@ textarea {
   height: 1000px;
   width: 100px;
 } */
+.main-page {
+  height: 100vh;
+  border-radius: 25px;
+  overflow: hidden;
+}
 </style>

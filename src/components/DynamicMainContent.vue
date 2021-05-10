@@ -26,7 +26,7 @@ export default {
   components: {
     CalendarBox,
     Hitokoto,
-    Navigation,
+    Navigation
   },
   data() {
     return {

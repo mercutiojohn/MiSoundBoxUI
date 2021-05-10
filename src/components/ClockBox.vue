@@ -294,6 +294,7 @@ export default {
   /* text-shadow: 0 5px 10px #00000083; */
 }
 .clockbox-open-icon i {
+  color: var(--main-color);
   font-size: 25px !important;
 }
 #clockbox-wrap {
