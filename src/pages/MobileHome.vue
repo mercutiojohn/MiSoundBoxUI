@@ -1,36 +1,29 @@
 <template>
   <div id="mobile">
-    
     <div class="mobile-tools-list">
-<<<<<<< HEAD
       <swiper :options="swiperOption2">
-      <swiper-slide class="mobile-tool-item main-width">
-        <!-- <div class="mobile-tool-item main-width"> -->
+        <swiper-slide class="first-width fake-margin oline">
+          <div class="mobile-tool-item first-width-inner">
           <DynamicMainContent />
-        <!-- </div> -->
-      </swiper-slide>
-      <swiper-slide class="mobile-tool-item force-width">
-          <Countdown />
-      </swiper-slide>
-      <swiper-slide class="mobile-tool-item force-width">
-          <Player />
-      </swiper-slide>
-      <swiper-slide class="mobile-tool-item force-width">
-      </swiper-slide>
-    </swiper>
-      <!-- <div class="mobile-tool-item main-width">
-=======
-      <div class="mobile-tool-item main-width">
->>>>>>> mobile
+          </div>
+        </swiper-slide>
+        <swiper-slide class="force-width fake-margin oline">
+          <div class="mobile-tool-item">
+          <Countdown /></div>
+        </swiper-slide>
+        <swiper-slide class="force-width fake-margin oline">
+          <div class="mobile-tool-item">
+          <Player /></div>
+        </swiper-slide>
+        <swiper-slide class="force-width fake-margin oline">
+          <div class="mobile-tool-item"></div> </swiper-slide>
+      </swiper>
+      <!-- <div class="mobile-tool-item first-width-inner">
         <DynamicMainContent />
       </div>
       <div class="mobile-tool-item">
         <Countdown />
       </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> mobile
       <div class="mobile-tool-item">
         <Player />
       </div>
@@ -55,7 +48,6 @@ export default {
     Countdown,
     Homeworks,
     DynamicMainContent,
-<<<<<<< HEAD
     EmbedFrame,
   },
   data() {
@@ -67,12 +59,10 @@ export default {
         },
         loop: false,
         direction: "horizontal",
-        spaceBetween: 10,
+        spaceBetween: 0,
         slidesPerView: "auto",
       },
     };
-=======
->>>>>>> mobile
   },
   methods: {
     linktab() {
@@ -105,10 +95,10 @@ export default {
 body {
   /* background: #000; */
 }
-.main-width {
+.first-width-inner {
   width: calc(100vw - 100px);
 }
-.main-width * {
+.first-width-inner * {
   zoom: 1;
 }
 .mobile-tool-item > * {
@@ -125,7 +115,7 @@ body {
 }
 .mobile-tool-item {
   height: 100%;
-  margin: 0 0 0 10px;
+  /* margin: 0 0 0 20px; */
   background: var(--elem-color);
   border-radius: 30px;
   /* box-shadow: 0 2px 6px 1px #00000014; */
@@ -137,16 +127,27 @@ body {
   overflow-y: scroll;
   flex-shrink: 0;
   min-width: calc(100vh - 64px);
-
 }
-.mobile-tool-item:first-child{
-  margin: 0 0 0 20px;
-  
+.mobile-tool-item:first-child {
+  /* margin: 0 0 0 20px; */
 }
 /* .mobile-tool-item:last-child{
   outline:10px
 } */
-.force-width{
+.force-width {
   width: calc(100vh - 64px);
+}
+.first-width{
+  width: calc(100vw - 100px);
+}
+.fake-margin-first{
+  padding:0 5px 0 10px;
+}
+.fake-margin{
+  padding:0 10px;
+}
+.oline{
+  /* border: 1px solid #fff; */
+
 }
 </style>
