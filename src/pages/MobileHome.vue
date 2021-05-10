@@ -2,6 +2,7 @@
   <div id="mobile">
     
     <div class="mobile-tools-list">
+<<<<<<< HEAD
       <swiper :options="swiperOption2">
       <swiper-slide class="mobile-tool-item main-width">
         <!-- <div class="mobile-tool-item main-width"> -->
@@ -18,11 +19,18 @@
       </swiper-slide>
     </swiper>
       <!-- <div class="mobile-tool-item main-width">
+=======
+      <div class="mobile-tool-item main-width">
+>>>>>>> mobile
         <DynamicMainContent />
       </div>
       <div class="mobile-tool-item">
         <Countdown />
       </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> mobile
       <div class="mobile-tool-item">
         <Player />
       </div>
@@ -47,6 +55,7 @@ export default {
     Countdown,
     Homeworks,
     DynamicMainContent,
+<<<<<<< HEAD
     EmbedFrame,
   },
   data() {
@@ -62,6 +71,8 @@ export default {
         slidesPerView: "auto",
       },
     };
+=======
+>>>>>>> mobile
   },
   methods: {
     linktab() {
