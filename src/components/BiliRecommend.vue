@@ -170,7 +170,7 @@ export default {
               type: "dislike",
             },
           ],
-          title: "真香警告！饿了好几天，恨不得把碗都吃了。",
+          title: "正在加载",
           uri:
             "bilibili://video/803056651?player_height=1080&player_rotate=0&player_width=1920",
         },
@@ -265,19 +265,21 @@ width: var(--content-max-width);
 box-sizing: border-box;
   position: absolute;
   bottom: 0;
-  background: linear-gradient(#00000000,#000000e8);
+  background-image: linear-gradient(#00000000,#000000e8);
   padding: 30px;
   border-radius: 0 0 30px 30px;
 }
 .item-title {
-  font-size: 35px;
+  font-size: 27px;
   height: 100%;
   padding: 0 0 10px 0;
   color: var(--main-color);
   font-weight: 800;
+  max-height: 50px;
+  text-overflow: ellipsis;
 }
 .item-desc {
-  font-size: 23px;
+  font-size: 20px;
   color: var(--inactive-color);
   z-index: 100;
 }
