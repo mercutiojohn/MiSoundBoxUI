@@ -107,8 +107,8 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 2;
-  background: #00000023;
-  /* background-image: radial-gradient(
+  /* background: #00000023; */
+  background-image: radial-gradient(
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0.1) 100%
     ),
@@ -119,7 +119,7 @@ export default {
       rgba(0, 0, 0, 0) 0% 75%,
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0.2) 100%
-    ); */
+    );
   pointer-events: none;
 }
 .dynamic-content {

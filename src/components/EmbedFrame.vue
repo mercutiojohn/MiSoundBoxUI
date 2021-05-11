@@ -1,6 +1,6 @@
 <template>
   <div class="embed">
-    <div class="embed-bottom-bar">
+    <div class="embed-bottom-bar" v-if="!hideActionBar">
       <span class="embed-title">{{ title }}</span>
       <div class="embed-icon-group">
         <a :href="url" target="_blank">
@@ -47,16 +47,20 @@ export default {
     title: String,
     height: {
       type: String,
-      default: '200px',
+      default: '200px'
     },
     zoom: {
       type: String,
-      default: '1',
+      default: '1'
     },
     hideExpand: {
       type: Boolean,
-      default: false,
+      default: false
     },
+    hideActionBar: {
+      type:Boolean,
+      default:false
+    }
   },
   data() {
     return {

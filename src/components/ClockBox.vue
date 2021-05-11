@@ -55,13 +55,13 @@
           <div class="card-frame">
             <TVNoise />
           </div> -->
-          <div class="card-frame">
+          <!-- <div class="card-frame">
             <EmbedFrame
             url="https://www.dida365.com/webapp/#q/all/today"
             title="滴答清单"
             height="calc(100vh - 90px)"
           />
-          </div>
+          </div> -->
           <!-- <div class="card-frame">
           <iframe
             id="left-col-iframe"
@@ -88,6 +88,7 @@ export default {
   },
   data() {
     return {
+      timer:'',
       currUrl: 0,
       url: [
         "https://app.raindrop.io/my/0",
@@ -181,6 +182,11 @@ export default {
   },
   created() {
     this.date = this.getTime();
+    let _this = this;
+    this.timer = setInterval(()=>{
+      _this.date = this.getTime();
+    },1000);
+    
   },
   computed: {
     week: function () {
@@ -233,7 +239,7 @@ export default {
 }
 #clockbox-space {
   height: var(--headbar-height);
-  height: 0;
+  /* height: 0; */
   /* width: 100%; */
   display: flex;
   align-items: center;

@@ -1,28 +1,29 @@
 <template>
   <div id="all">
-    <!-- <swiper :options="swiperOption">
-      <swiper-slide> -->
+    <!-- <swiper :options="swiperOption"> -->
+      <!-- <swiper-slide> -->
         <div class="main-page">
           <HeaderBar />
           <!-- <div id="fake"></div>  -->
-          <transition name="fade" mode="out-in">
+          <!-- <transition name="fade" mode="out-in"> -->
             <!-- <keep-alive> -->
             <router-view></router-view>
             <!-- </keep-alive> -->
-          </transition>
+          <!-- </transition> -->
           <!-- <Course /> -->
         </div>
-      <!-- </swiper-slide>
-      <swiper-slide> -->
+      <!-- </swiper-slide> -->
+      <!-- <swiper-slide> -->
         <EmbedFrame
           url="https://www.dida365.com/webapp/#q/all/today"
           title="滴答清单"
-          height="calc(100vh - 40px)"
+          height="calc(100vh - 1px)"
           :hideExpand="true"
+          :hideActionBar="true"
         />
       <!-- </swiper-slide> -->
       <!-- <swiper-slide class=""></swiper-slide> -->
-    </swiper>
+    <!-- </swiper> -->
   </div>
 </template>
 <script>
@@ -77,6 +78,8 @@ export default {
 
 <style>
 @import "./main.css";
+
+ *{ -webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
 
 body {
   /* perspective:550px; */

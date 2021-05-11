@@ -3,20 +3,31 @@
     <div class="mobile-tools-list">
       <swiper :options="swiperOption2">
         <swiper-slide class="first-width fake-margin oline">
-          <div class="mobile-tool-item first-width-inner">
-          <DynamicMainContent />
+          <div class="mobile-tool-item first-width-inner disable-scroll">
+            <DynamicMainContent />
           </div>
         </swiper-slide>
         <swiper-slide class="force-width fake-margin oline">
           <div class="mobile-tool-item">
-          <Countdown /></div>
+            <Countdown />
+          </div>
+        </swiper-slide>
+        
+        <swiper-slide class="force-width fake-margin oline">
+          <div class="mobile-tool-item">
+            <Player />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="first-width fake-margin oline">
+          <div class="mobile-tool-item first-width-inner">
+            <BiliRecommend />
+          </div>
         </swiper-slide>
         <swiper-slide class="force-width fake-margin oline">
           <div class="mobile-tool-item">
-          <Player /></div>
+            <Weibo />
+          </div>
         </swiper-slide>
-        <swiper-slide class="force-width fake-margin oline">
-          <div class="mobile-tool-item"></div> </swiper-slide>
       </swiper>
       <!-- <div class="mobile-tool-item first-width-inner">
         <DynamicMainContent />
@@ -41,6 +52,8 @@ import Countdown from "@/components/Countdown";
 import Homeworks from "@/components/Homeworks";
 import DynamicMainContent from "@/components/DynamicMainContent";
 import EmbedFrame from "@/components/EmbedFrame";
+import Weibo from '@/components/Weibo';
+import BiliRecommend from '@/components/BiliRecommend';
 export default {
   name: "MobileHome",
   components: {
@@ -49,6 +62,8 @@ export default {
     Homeworks,
     DynamicMainContent,
     EmbedFrame,
+    Weibo,
+    BiliRecommend
   },
   data() {
     return {
@@ -62,8 +77,8 @@ export default {
         spaceBetween: 0,
         slidesPerView: "auto",
         keyboard: {
-        enabled: true,
-      }
+          enabled: true,
+        },
       },
     };
   },
@@ -95,6 +110,10 @@ export default {
 </script>
 
 <style>
+:root{
+  --medium-width: calc(100vh - 64px);
+  --large-width: calc(100vw - 100px);
+}
 body {
   /* background: #000; */
 }
@@ -129,29 +148,32 @@ body {
   overflow: hidden;
   overflow-y: scroll;
   flex-shrink: 0;
-  min-width: calc(100vh - 64px);
+  /* min-width: calc(100vh - 64px); */
+  max-width: calc(100vw - 20px);
 }
 .mobile-tool-item:first-child {
-  overflow: hidden;
+  /* overflow: hidden; */
   /* margin: 0 0 0 20px; */
 }
 /* .mobile-tool-item:last-child{
   outline:10px
 } */
 .force-width {
-  width: calc(100vh - 64px);
+  width: var(--medium-width);
 }
-.first-width{
-  width: calc(100vw - 100px);
+.first-width {
+  width: var(--large-width);
 }
-.fake-margin-first{
-  padding:0 5px 0 10px;
+.fake-margin-first {
+  padding: 0 5px 0 10px;
 }
-.fake-margin{
-  padding:0 10px;
+.fake-margin {
+  padding: 0 10px;
 }
-.oline{
+.oline {
   /* border: 1px solid #fff; */
-
+}
+.disable-scroll{
+  overflow: hidden;
 }
 </style>

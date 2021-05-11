@@ -341,6 +341,8 @@ export default {
   /* height: max-content; */
   /* min-height: var(--audio-content-width); */
   height: var(--audio-content-height);
+  max-width: calc(100vw - 60px);
+  max-height: calc(100vw - 60px);
   /* max-width: var(--); */
   background: var(--first-assist-color);
   border-radius: 10px;
