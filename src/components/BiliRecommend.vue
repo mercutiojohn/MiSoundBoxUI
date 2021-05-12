@@ -50,13 +50,13 @@ export default {
             tid: 9955,
             tname: "汪星人",
             up_id: 1463519331,
-            up_name: "隔壁老李的矿山日记",
+            up_name: "正在加载",
           },
           can_play: 1,
           card_goto: "av",
           card_type: "small_cover_v2",
           cover:
-            "http://i0.hdslb.com/bfs/archive/c4249b758b5ed8bc1885ec569533fce4f3ce84b9.jpg",
+            "",
           cover_left_icon_1: 1,
           cover_left_icon_2: 3,
           cover_left_text_1: "12.1万",
@@ -65,14 +65,14 @@ export default {
           desc_button: {
             event: "channel_click",
             event_v2: "channel",
-            text: "汪星人 · 汪星人",
+            text: "正在加载",
             type: 1,
             uri: "bilibili://pegasus/channel/9955",
           },
           goto: "av",
           idx: 1620734408,
           official_icon: 16,
-          param: "803056651",
+          param: "",
           player_args: {
             aid: 803056651,
             cid: 336604845,
@@ -172,7 +172,7 @@ export default {
           ],
           title: "正在加载",
           uri:
-            "bilibili://video/803056651?player_height=1080&player_rotate=0&player_width=1920",
+            "",
         },
       ],
     };
@@ -246,7 +246,7 @@ export default {
 }
 .bili-item a {
   text-decoration: none;
-  color: var(--main-color);
+  color: var(--elem-color);
 }
 .item-cover {
   width: var(--content-max-width);
@@ -265,7 +265,7 @@ width: var(--content-max-width);
 box-sizing: border-box;
   position: absolute;
   bottom: 0;
-  background-image: linear-gradient(#00000000,#000000e8);
+  background-image: linear-gradient(#00000000,#000000ee);
   padding: 30px;
   border-radius: 0 0 30px 30px;
 }
@@ -273,14 +273,14 @@ box-sizing: border-box;
   font-size: 27px;
   height: 100%;
   padding: 0 0 10px 0;
-  color: var(--main-color);
+  color: #ffffff;
   font-weight: 800;
   max-height: 50px;
   text-overflow: ellipsis;
 }
 .item-desc {
   font-size: 20px;
-  color: var(--inactive-color);
+  color: #ffffff78;
   z-index: 100;
 }
 </style>
