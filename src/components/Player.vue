@@ -259,24 +259,24 @@ export default {
 @keyframes bounce-in {
   0% {
     opacity: 0;
-    transform: scale(0.8);
-    max-height: 0;
+    /* transform: scale(0.8); */
+    /* max-height: 0; */
     /* filter: blur(10px); */
 
   }
   30% {
-    transform: scale(1.01);
+    /* transform: scale(1.01); */
     opacity: 1;
 
   }
   100% {
-    transform: scale(1);
+    /* transform: scale(1); */
     opacity: 1;
   }
 }
 @keyframes bounce-out {
   0% {
-    transform: scale(1);
+    /* transform: scale(1); */
     opacity: 1;
   }
   30% {
@@ -285,8 +285,8 @@ export default {
 
   }
   100% {
-    transform: scale(0.8);
-    max-height: 0;
+    /* transform: scale(0.8); */
+    /* max-height: 0; */
     opacity: 0;
     /* filter: blur(1px); */
 

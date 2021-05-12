@@ -8,9 +8,12 @@
         :onerror="defaultBg"
         ref="bgImg"
       />
-      <div id="dynamic-left-background-mask"></div>
+      <div id="dynamic-left-background-mask">
+        <!-- <div class="change-bg-area" @click="changeBackground()"></div> -->
+        <!-- <div class="change-bg-area2" @click="changeBackground()"></div> -->
+      </div>
       <div class="dynamic-content">
-        <CalendarBox />
+        <CalendarBox/>
         <Hitokoto />
       </div>
     </div>
@@ -30,6 +33,7 @@ export default {
   },
   data() {
     return {
+      timer:'',
       bgSrc: "https://source.unsplash.com/random/800x600",
       fullscreen: false,
     };
@@ -58,7 +62,7 @@ export default {
     this.getList();
   },
   mounted() {
-    setInterval(this.changeBackground, 480000);
+    this.timer = setInterval(this.changeBackground, 480000);
   },
   computed: {
     defaultBg: function () {
@@ -133,7 +137,23 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 3;
-  pointer-events: none;
+  /* pointer-events: none; */
+}
+.change-bg-area{
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  transform: translate(-50px,-50px);
+  background: rgb(255, 153, 0);
+  z-index: 100000;
+  border-radius: 100px;
+}
+.change-bg-area2{
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right,#10004bff,#ffffff00) ;
+  z-index: 100000;
+  /* border-radius: 100px; */
 }
 @media screen and (max-width: 1100px) {
   #dynamic-main-content {

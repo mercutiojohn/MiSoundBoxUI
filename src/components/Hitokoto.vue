@@ -1,6 +1,6 @@
 <template>
   <div class="hitokoto">
-    <div class="hitokoto-box">
+    <div :class="{'hitokoto-box':true,'hitokoto-box-loading':loading}" @click="getHitokoto()">
       <span class="hitokoto-content">{{ data.hitokoto }}</span>
       <span class="hitokoto-from">——{{ data.from }}</span>
     </div>
@@ -27,7 +27,7 @@ export default {
         created_at: "1583784351",
         length: 26,
       },
-      hitoKind:"a&c=b&c=c&c=d&c=e&c=f&c=g&c=h&c=i&c=j&c=k"
+      hitoKind:"a&c=b&c=c&c=d&c=e&c=f&c=g&c=h&c=i&c=j&c=k",
         // a	动画
         // b	漫画
         // c	游戏
@@ -41,17 +41,21 @@ export default {
         // k	哲学
         // l	抖机灵
         // 其他	作为 动画 类型处理
+        loading:true
     };
   },
 
   methods: {
     getHitokoto() {
+      this.loading = true;
       this.$axios
         .get("https://v1.hitokoto.cn?c="+this.hitoKind)
         .then(({ data }) => {
           this.data = data;
+          this.loading = false;
         })
         .catch(console.error);
+        
     },
   },
   created() {},
@@ -75,6 +79,11 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    transition: opacity .2s ease;
+}
+.hitokoto-box-loading{
+  opacity:0;
+  /* transition-delay: 200ms; */
 }
 .hitokoto-content {
   text-shadow: 0 0 20px #00000094;

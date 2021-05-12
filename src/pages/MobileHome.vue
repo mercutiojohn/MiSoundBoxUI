@@ -9,10 +9,15 @@
         </swiper-slide>
         <swiper-slide class="force-width fake-margin oline">
           <div class="mobile-tool-item">
+            <Weather />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="force-width fake-margin oline">
+          <div class="mobile-tool-item">
             <Countdown />
           </div>
         </swiper-slide>
-        
+
         <swiper-slide class="force-width fake-margin oline">
           <div class="mobile-tool-item">
             <Player />
@@ -52,8 +57,9 @@ import Countdown from "@/components/Countdown";
 import Homeworks from "@/components/Homeworks";
 import DynamicMainContent from "@/components/DynamicMainContent";
 import EmbedFrame from "@/components/EmbedFrame";
-import Weibo from '@/components/Weibo';
-import BiliRecommend from '@/components/BiliRecommend';
+import Weibo from "@/components/Weibo";
+import BiliRecommend from "@/components/BiliRecommend";
+import Weather from "@/components/Weather";
 export default {
   name: "MobileHome",
   components: {
@@ -63,7 +69,8 @@ export default {
     DynamicMainContent,
     EmbedFrame,
     Weibo,
-    BiliRecommend
+    BiliRecommend,
+    Weather
   },
   data() {
     return {
@@ -110,7 +117,7 @@ export default {
 </script>
 
 <style>
-:root{
+:root {
   --medium-width: calc(100vh - 64px);
   --large-width: calc(100vw - 100px);
 }
@@ -150,14 +157,23 @@ body {
   flex-shrink: 0;
   /* min-width: calc(100vh - 64px); */
   max-width: calc(100vw - 20px);
+  transition: all .1s ease;
+  /* transition-delay: 50ms; */
+
 }
 .mobile-tool-item:first-child {
   /* overflow: hidden; */
   /* margin: 0 0 0 20px; */
 }
+
 /* .mobile-tool-item:last-child{
   outline:10px
 } */
+.mobile-tool-item:active{
+  transform: scale(.98);
+  transition-delay: 0;
+
+}
 .force-width {
   width: var(--medium-width);
 }
@@ -173,7 +189,16 @@ body {
 .oline {
   /* border: 1px solid #fff; */
 }
-.disable-scroll{
+.disable-scroll {
   overflow: hidden;
+}
+.swiper-slide {
+  transition:all .2s ease;
+}
+
+
+.swiper-slide-prev {
+    transform: scale(0.86);
+
 }
 </style>

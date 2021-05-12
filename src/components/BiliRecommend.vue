@@ -249,6 +249,7 @@ export default {
   color: var(--elem-color);
 }
 .item-cover {
+    background: #000;
   width: var(--content-max-width);
   height: var(--content-max-height);
   /* overflow: hidden; */
@@ -266,21 +267,31 @@ box-sizing: border-box;
   position: absolute;
   bottom: 0;
   background-image: linear-gradient(#00000000,#000000ee);
-  padding: 30px;
+  /* background-color: #00000090; */
+  padding: 70px 40px 20px 30px;
   border-radius: 0 0 30px 30px;
 }
 .item-title {
-  font-size: 27px;
+  display: flex;
+  font-size: 23px;
   height: 100%;
-  padding: 0 0 10px 0;
+  margin: 0 0 10px 0;
   color: #ffffff;
   font-weight: 800;
-  max-height: 50px;
+  max-height: 64px;
   text-overflow: ellipsis;
+  /* white-space: pre-wrap; */
+  overflow: hidden; 
+  /*
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; */
 }
 .item-desc {
-  font-size: 20px;
-  color: #ffffff78;
-  z-index: 100;
+  font-size: 15px;
+  color: #bebebede;
+  /* z-index: 100; */
+  display: flex;
+  justify-content: space-between;
 }
 </style>
