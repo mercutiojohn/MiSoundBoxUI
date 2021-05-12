@@ -104,7 +104,7 @@ export default {
   flex-direction: column;
   transition: all .2s ease;
   background: linear-gradient(-45deg, rgb(247, 21, 115) , rgb(132, 0, 255) );
-  background: linear-gradient(-45deg, rgb(21, 247, 198) , rgb(132, 0, 255) );
+  background: linear-gradient(-45deg, rgb(247, 21, 21) , rgb(111, 0, 255) );
   /* background: linear-gradient(-45deg, rgb(21, 247, 198) , rgb(190, 204, 0) ); */
   
   color: #fff;

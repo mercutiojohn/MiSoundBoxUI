@@ -39,7 +39,7 @@ export default {
   mounted() {
     const script = document.createElement("script");
     script.src =
-      "https://v1.cnzz.com/z_stat.php?id=1279258067&web_id=1279258067";
+      "https://s9.cnzz.com/z_stat.php?id=1279921693&web_id=1279921693";
     script.language = "JavaScript";
     document.body.appendChild(script);
   },
