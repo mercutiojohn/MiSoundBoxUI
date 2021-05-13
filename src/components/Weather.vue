@@ -10,18 +10,28 @@
         </div>
       </div>
     </transition>
+    <!-- <transition name="fade" type="out-in">
+      <div class="warning-details" v-if="warningLookup">
+        <div class="header" :style="{ 'background-color': aqiLevelColorTrans(airInfo.level) }">
+          <span class="title">{{ item.typeName }}{{item.level}}</span>
+          <button @click="warningLookup = false">确定</button>
+        </div>
+        <span class="content"></span>
+      </div>
+    </transition> -->
     <transition name="fade" type="out-in">
       <div class="weather-content" v-if="!citySelect">
         <span class="city" @click="changeSelect">{{ city }}</span>
         <div class="weather-loading" v-if="loading">
-          <span>天气加载中</span> 
+          <span>天气加载中</span>
         </div>
-        <div class="tmp-n-brief"  v-if="!loading">
+        <div class="tmp-n-brief" v-if="!loading">
           <span class="temprature">{{ tmpNew }}°</span>
           <span class="brief">{{ briefNew }}</span>
         </div>
         <div
-          class="air-info" v-if="!loading"
+          class="air-info"
+          v-if="!loading"
           :style="{ 'background-color': aqiLevelColorTrans(airInfo.level) }"
         >
           <span class="aqi">{{ airInfo.aqi }}</span>
@@ -50,7 +60,7 @@ export default {
   components: {},
   data() {
     return {
-      loading:true,
+      loading: true,
       city: "济南",
       tmpNew: "0",
       briefNew: "加载中",
@@ -102,6 +112,7 @@ export default {
         //     "长春市气象台2020年6月20日22时20分发布大风蓝色预警信号:预计未来24小时内，我市有5-6级西南风，瞬间风力可达7-8级，市应急管理局、市气象局联合提醒，注意做好防范。（预警信息来源：国家预警信息发布中心）",
         // },
       ],
+      warningLookup: false,
     };
   },
   computed: {},
@@ -204,7 +215,6 @@ export default {
           return "#430091";
         default:
           return "#6e6e6e";
-
       }
     },
   },
@@ -217,7 +227,7 @@ export default {
 </script>
 
 <style>
-hello{
+hello {
   color: #f1ba02;
 }
 .weather {
@@ -225,7 +235,6 @@ hello{
   height: 100%;
   background: linear-gradient(45deg, rgb(0, 140, 255), rgb(36, 211, 255));
   user-select: none;
-  
 }
 .weather-content {
   min-height: 100%;
@@ -233,7 +242,7 @@ hello{
   /* color: var(--main-color); */
   color: #fff;
 }
-.weather-loading{
+.weather-loading {
   height: 100%;
   display: flex;
   align-items: center;
@@ -268,6 +277,12 @@ hello{
   padding: 20px;
   height: 100%;
 }
+.change-city > .title {
+  /* text-align: center; */
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--main-color);
+}
 .change-city > input {
   background: var(--first-assist-color);
   transition: all 0.2s ease;
@@ -276,26 +291,28 @@ hello{
   font-size: 22px;
   border-radius: 10px;
 }
+
 .change-city > input:focus {
   background: transparent;
   border-color: var(--accent-color);
 }
 .change-city > .options {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 .options button {
   border: none;
   background: var(--first-assist-color);
   color: var(--main-color);
-  height: 60px;
-  width: 60px;
-  border-radius: 30px;
+  height: 50px;
+  width: 80px;
+  border-radius: 25px;
   transition: all 0.2s ease;
+  margin: 0 10px;
 }
 .options button:active {
   background: var(--accent-color);
-  transform: scale(2);
+  transform: scale(1.5);
   color: #fff;
 }
 .air-info {
