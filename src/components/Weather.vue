@@ -61,7 +61,7 @@ export default {
   data() {
     return {
       loading: true,
-      city: "济南",
+      city: "北京",
       tmpNew: "0",
       briefNew: "加载中",
       tmpOld: "",
