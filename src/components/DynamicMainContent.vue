@@ -89,7 +89,7 @@ export default {
   height: 100%;
   position: relative;
   z-index: 99;
-  background: #444;
+  background: #231750;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

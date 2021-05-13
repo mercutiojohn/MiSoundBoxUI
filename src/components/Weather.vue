@@ -1,34 +1,46 @@
 <template>
   <div class="weather">
-    <div class="weather-content" v-if="!citySelect">
-      <span class="city" @click="changeSelect">{{ city }}</span>
-      <div class="tmp-n-brief">
-        <span class="temprature">{{ tmpNew }}°</span>
-        <span class="brief">{{ briefNew }}</span>
+    <transition name="fade" type="out-in">
+      <div class="change-city" v-if="citySelect">
+        <span class="title">切换城市</span>
+        <input type="text" v-model="cityTemp" />
+        <div class="options">
+          <button @click="changeSelect">确定</button>
+          <button @click="cancelSelect">取消</button>
+        </div>
       </div>
-      <div class="air-info">
-        <span class="aqi">{{ aqi }}</span>
-        <span class="level">{{ aqiLevel }}</span>
-      </div>
-      <div class="warning-info">
-        <div class="info-item" v-for="(item, index) in warning" :key="index">
-          <div class="label">
-            <span class="type">{{ item.type }}</span>
-            <span class="level">{{ item.level }}</span>
-            <span>预警</span>
+    </transition>
+    <transition name="fade" type="out-in">
+      <div class="weather-content" v-if="!citySelect">
+        <span class="city" @click="changeSelect">{{ city }}</span>
+        <div class="weather-loading" v-if="loading">
+          <span>天气加载中</span> 
+        </div>
+        <div class="tmp-n-brief"  v-if="!loading">
+          <span class="temprature">{{ tmpNew }}°</span>
+          <span class="brief">{{ briefNew }}</span>
+        </div>
+        <div
+          class="air-info" v-if="!loading"
+          :style="{ 'background-color': aqiLevelColorTrans(airInfo.level) }"
+        >
+          <span class="aqi">{{ airInfo.aqi }}</span>
+          <span class="level">{{ airInfo.category }}</span>
+        </div>
+        <div class="warning-info" v-if="!loading">
+          <div class="info-item" v-for="(item, index) in warning" :key="index">
+            <div
+              class="label"
+              :style="{ 'background-color': warningColorTrans(item.level) }"
+            >
+              <span class="type">{{ item.typeName }}</span>
+              <span class="level">{{ item.level }}</span>
+              <span>预警</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="change-city" v-if="citySelect">
-      <span class="title">切换城市</span>
-      <input type="text" v-model="cityTemp" />
-      <div class="options">
-        <button @click="changeSelect">确定</button>
-        <button @click="cancelSelect">取消</button>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -38,44 +50,57 @@ export default {
   components: {},
   data() {
     return {
+      loading:true,
       city: "济南",
-      tmpNew: "",
-      briefNew: "",
+      tmpNew: "0",
+      briefNew: "加载中",
       tmpOld: "",
       briefOld: "",
       resOld: "",
       resWeatherContent: "",
-      resAirContent: "",
+      airInfo: {
+        pubTime: "2021-05-13T11:00+08:00",
+        aqi: "0",
+        level: "1",
+        category: "加载中",
+        primary: "NA",
+        pm10: "22",
+        pm2p5: "10",
+        no2: "11",
+        so2: "8",
+        co: "0.4",
+        o3: "95",
+      },
       resGeo: "",
       citySelect: false,
       cityTemp: "",
       aqi: "",
       aqiLevel: "",
       warning: [
-        {
-          id: "1010601202006202220000501",
-          pubTime: "2020-06-20T22:20+08:00",
-          title: "吉林省长春市气象台发布大风蓝色预警",
-          startTime: "",
-          endTime: "",
-          status: "预警中",
-          level: "蓝色",
-          type: "大风",
-          text:
-            "长春市气象台2020年6月20日22时20分发布大风蓝色预警信号:预计未来24小时内，我市有5-6级西南风，瞬间风力可达7-8级，市应急管理局、市气象局联合提醒，注意做好防范。（预警信息来源：国家预警信息发布中心）",
-        },
-        {
-          id: "1010601202006202220000501",
-          pubTime: "2020-06-20T22:20+08:00",
-          title: "吉林省长春市气象台发布大风蓝色预警",
-          startTime: "",
-          endTime: "",
-          status: "预警中",
-          level: "红色",
-          type: "暴雨",
-          text:
-            "长春市气象台2020年6月20日22时20分发布大风蓝色预警信号:预计未来24小时内，我市有5-6级西南风，瞬间风力可达7-8级，市应急管理局、市气象局联合提醒，注意做好防范。（预警信息来源：国家预警信息发布中心）",
-        },
+        // {
+        //   id: "1010601202006202220000501",
+        //   pubTime: "2020-06-20T22:20+08:00",
+        //   title: "吉林省长春市气象台发布大风蓝色预警",
+        //   startTime: "",
+        //   endTime: "",
+        //   status: "预警中",
+        //   level: "蓝色",
+        //   type: "大风",
+        //   text:
+        //     "长春市气象台2020年6月20日22时20分发布大风蓝色预警信号:预计未来24小时内，我市有5-6级西南风，瞬间风力可达7-8级，市应急管理局、市气象局联合提醒，注意做好防范。（预警信息来源：国家预警信息发布中心）",
+        // },
+        // {
+        //   id: "1010601202006202220000501",
+        //   pubTime: "2020-06-20T22:20+08:00",
+        //   title: "吉林省长春市气象台发布大风蓝色预警",
+        //   startTime: "",
+        //   endTime: "",
+        //   status: "预警中",
+        //   level: "红色",
+        //   type: "暴雨",
+        //   text:
+        //     "长春市气象台2020年6月20日22时20分发布大风蓝色预警信号:预计未来24小时内，我市有5-6级西南风，瞬间风力可达7-8级，市应急管理局、市气象局联合提醒，注意做好防范。（预警信息来源：国家预警信息发布中心）",
+        // },
       ],
     };
   },
@@ -83,6 +108,7 @@ export default {
   watch: {},
   methods: {
     searchWeather: async function () {
+      this.loading = true;
       //注意：这里有 async 用来完成异步操作
       //由于调用api是异步操作
       //在请求的时候需要用async+await让它同步，否则数据不好取出
@@ -115,7 +141,8 @@ export default {
       let weatherRes = await fetch(httpUrl1);
       let weatherResult = await weatherRes.json();
       console.log(weatherResult);
-      this.resWeatherContent = weatherResult;
+      this.resWeatherContent = weatherResult.now;
+
       let nowWeather = weatherResult.now;
       this.tmpNew = nowWeather.temp;
       this.briefNew = nowWeather.text;
@@ -124,7 +151,8 @@ export default {
       let airRes = await fetch(airUrl);
       let airResult = await airRes.json();
       console.log(airResult);
-      this.resAirContent = airResult;
+      this.airInfo = airResult.now;
+
       let nowAir = airResult.now;
       this.aqi = nowAir.aqi;
       this.aqiLevel = nowAir.category;
@@ -133,7 +161,8 @@ export default {
       let warnRes = await fetch(warnUrl);
       let warnResult = await warnRes.json();
       console.log(warnResult);
-      // this.warning = warnResult.warning;
+      this.warning = warnResult.warning;
+      this.loading = false;
     },
     changeSelect() {
       this.citySelect
@@ -145,6 +174,39 @@ export default {
     cancelSelect() {
       this.citySelect = false;
     },
+    warningColorTrans(colorName) {
+      switch (colorName) {
+        case "蓝色":
+          return "#00b7ff";
+        case "黄色":
+          return "#f78d02";
+        case "橙色":
+          return "#e95500";
+        case "红色":
+          return "#d61857";
+        default:
+          return "#6e6e6e";
+      }
+    },
+    aqiLevelColorTrans(level) {
+      switch (level) {
+        case "1":
+          return "#00be7f";
+        case "2":
+          return "#00b7ff";
+        case "3":
+          return "#f1ba02";
+        case "4":
+          return "#e95500";
+        case "5":
+          return "#d61857";
+        case "6":
+          return "#430091";
+        default:
+          return "#6e6e6e";
+
+      }
+    },
   },
   created() {},
   mounted() {
@@ -155,15 +217,27 @@ export default {
 </script>
 
 <style>
+hello{
+  color: #f1ba02;
+}
 .weather {
   width: 100%;
   height: 100%;
   background: linear-gradient(45deg, rgb(0, 140, 255), rgb(36, 211, 255));
+  user-select: none;
+  
 }
 .weather-content {
+  min-height: 100%;
   padding: 20px;
   /* color: var(--main-color); */
   color: #fff;
+}
+.weather-loading{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .city {
 }
@@ -181,6 +255,12 @@ export default {
   font-size: 25px;
 }
 .change-city {
+  /* position: absolute;
+  top:0;
+  left: 0; */
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--elem-color);
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -188,17 +268,44 @@ export default {
   padding: 20px;
   height: 100%;
 }
+.change-city > input {
+  background: var(--first-assist-color);
+  transition: all 0.2s ease;
+  border: 3px solid transparent;
+  padding: 10px 5px;
+  font-size: 22px;
+  border-radius: 10px;
+}
+.change-city > input:focus {
+  background: transparent;
+  border-color: var(--accent-color);
+}
 .change-city > .options {
   display: flex;
   justify-content: space-evenly;
 }
+.options button {
+  border: none;
+  background: var(--first-assist-color);
+  color: var(--main-color);
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+  transition: all 0.2s ease;
+}
+.options button:active {
+  background: var(--accent-color);
+  transform: scale(2);
+  color: #fff;
+}
 .air-info {
   display: flex;
   width: max-content;
-  background: rgb(0, 190, 127);
+  background: #6e6e6e;
   border-radius: 5px;
   padding: 2px 5px;
   align-items: center;
+  margin: 0 0 5px 0;
   /* justify-content: baseline; */
 }
 .air-info > .aqi {
@@ -206,16 +313,15 @@ export default {
   font-size: 20px;
   padding-right: 5px;
 }
-.info-item >.label>.level{
-
+.info-item > .label > .level {
 }
-.info-item > .label{
+.info-item > .label {
   display: flex;
   width: max-content;
-  background: rgb(0, 190, 127);
+  background: #6e6e6e;
   border-radius: 5px;
   padding: 2px 5px;
   align-items: center;
-margin: 2px 0;
+  margin: 5px 0;
 }
 </style>
