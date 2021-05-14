@@ -306,10 +306,12 @@ hello {
   padding: 10px 5px;
   font-size: 22px;
   border-radius: 10px;
+  color: var(--main-color);
 }
 
 .change-city > input:focus {
-  background: transparent;
+    background: var(--second-assist-color);
+
   border-color: var(--accent-color);
 }
 .change-city > .options {

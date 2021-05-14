@@ -1,7 +1,7 @@
 <template>
   <div id="countdown">
     <transition name="fade">
-      <div class="countdown-choose" v-if="expand">
+      <div class="countdown-choose" v-if="expand" @click="expand = false">
         <div
           class="countdown-choose-item"
           v-for="(item, i) in dates"
