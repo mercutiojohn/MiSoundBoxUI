@@ -1,52 +1,7 @@
 <template>
   <div id="player">
     <div class="player-wrap">
-      <div class="player-entry">
-        <div class="player-cover" @click="changeWrapState">
-          <!-- <video
-            id="myVideo"
-            class="player-media video-js vjs-default-skin vjs-big-play-centered"
-            x-webkit-airplay="true"
-            x5-video-player-fullscreen="true"
-            preload="auto"
-            playsinline="true"
-            webkit-playsinline
-            x5-video-player-typ="h5"
-          >
-            <source :type="audioType" :src="audioSrc" />
-          </video> -->
-          <audio-player
-            @sendPlayerItem="updatePlayerItem"
-            :options="videoOptions"
-            :key="timer"
-          />
-          <img
-            class="player-cover-image"
-            :src="getImage(cover)"
-            :alt="audioTitle"
-            srcset=""
-          />
-        </div>
-        <div class="player-info">
-          <span class="player-info-title">{{ audioTitle }}</span>
-          <span class="player-info-artist">{{ artist }}</span>
-        </div>
-        <div class="player-control-area">
-          <div @click="audioControl" class="player-control-btn-playpause">
-            <i
-              v-if="audioStatus"
-              class="player-control-btn-large iconfont icon-pause1"
-            >
-            </i>
-            <i v-else class="player-control-btn-large iconfont icon-play1"></i>
-          </div>
-          <i
-            class="player-control-btn-medium iconfont icon-chevron-right"
-            @click="audioChange('next')"
-          ></i>
-        </div>
-      </div>
-      <transition name="fade-in-out">
+      <transition name="fade" type="out-in">
         <div
           class="player-expanded-content"
           ref="content"
@@ -73,6 +28,56 @@
                 <span class="card-details">{{ item.artist }}</span>
               </div>
             </div>
+          </div>
+        </div>
+      </transition>
+      <transition name="fade" type="out-in">
+        <div class="player-entry" v-if="!playerWrapDisplay"  @click="changeWrapState">
+          <div class="player-cover">
+            <!-- <video
+            id="myVideo"
+            class="player-media video-js vjs-default-skin vjs-big-play-centered"
+            x-webkit-airplay="true"
+            x5-video-player-fullscreen="true"
+            preload="auto"
+            playsinline="true"
+            webkit-playsinline
+            x5-video-player-typ="h5"
+          >
+            <source :type="audioType" :src="audioSrc" />
+          </video> -->
+            <audio-player
+              @sendPlayerItem="updatePlayerItem"
+              :options="videoOptions"
+              :key="timer"
+            />
+            <img
+              class="player-cover-image"
+              :src="getImage(cover)"
+              :alt="audioTitle"
+              srcset=""
+            />
+          </div>
+          <div class="player-info">
+            <span class="player-info-title">{{ audioTitle }}</span>
+            <span class="player-info-artist">{{ artist }}</span>
+          </div>
+          <div class="player-control-area">
+            <div @click="audioControl" class="player-control-btn-playpause">
+              <i
+                v-if="audioStatus"
+                class="player-control-btn-large iconfont icon-pause1"
+              >
+              </i>
+              <i
+                v-else
+                class="player-control-btn-large iconfont icon-play1"
+              ></i>
+            </div>
+            <i
+              class="player-control-btn-medium iconfont icon-chevron-right"
+              @click="audioChange('next')"
+            ></i>
           </div>
         </div>
       </transition>
@@ -213,30 +218,30 @@ export default {
     audioId(newId) {
       localStorage.audio_index = newId;
     },
-    playerWrapDisplay(newStat) {
-      if (newStat) {
-        setTimeout(()=>{
-          console.log(this.$refs.content.offsetHeight);
-          if (this.$refs.content.offsetHeight != 0){ 
-            this.listHeight = `${this.$refs.content.offsetHeight}px`;
-            this.$refs.content.style.maxHeight = this.listHeight;
-          }
-        },500);
-        
-        // this.$refs.content.style.display="flex";
-        // setTimeout(()=>{
-        //   var height = this.listHeight;
-        //   this.$refs.content.style.height = height;
-        // },50);
-        // this.$refs.content.style.opacity = 1;
-      } else {
-        // this.$refs.content.style.height = 0;
-        // this.$refs.content.style.opacity = 0;
-        // setTimeout(()=>{
-        //   this.$refs.content.style.display="none";
-        // },200);
-      }
-    },
+    // playerWrapDisplay(newStat) {
+    //   if (newStat) {
+    //     setTimeout(()=>{
+    //       console.log(this.$refs.content.offsetHeight);
+    //       if (this.$refs.content.offsetHeight != 0){
+    //         this.listHeight = `${this.$refs.content.offsetHeight}px`;
+    //         this.$refs.content.style.maxHeight = this.listHeight;
+    //       }
+    //     },500);
+
+    //     // this.$refs.content.style.display="flex";
+    //     // setTimeout(()=>{
+    //     //   var height = this.listHeight;
+    //     //   this.$refs.content.style.height = height;
+    //     // },50);
+    //     // this.$refs.content.style.opacity = 1;
+    //   } else {
+    //     // this.$refs.content.style.height = 0;
+    //     // this.$refs.content.style.opacity = 0;
+    //     // setTimeout(()=>{
+    //     //   this.$refs.content.style.display="none";
+    //     // },200);
+    //   }
+    // },
   },
   beforeCreate() {},
   mounted() {
@@ -262,12 +267,10 @@ export default {
     /* transform: scale(0.8); */
     /* max-height: 0; */
     /* filter: blur(10px); */
-
   }
   30% {
     /* transform: scale(1.01); */
     opacity: 1;
-
   }
   100% {
     /* transform: scale(1); */
@@ -282,34 +285,31 @@ export default {
   30% {
     /* transform: scale(1.01); */
     opacity: 0.8;
-
   }
   100% {
     /* transform: scale(0.8); */
     /* max-height: 0; */
     opacity: 0;
     /* filter: blur(1px); */
-
-
   }
 }
-.fade-in-out-enter-active {
+/* .fade-in-out-enter-active {
   transform-origin: left top;
   animation: bounce-in 0.2s ease-out;
 }
 .fade-in-out-leave-active {
   transform-origin: left top;
   animation: bounce-out 0.2s ease-in;
-}
+} */
 :root {
   --audio-player-width: 400px;
   --audio-player-height: 90px;
   --audio-content-height: calc(100vh - 250px);
 }
 #player {
-  display: flex;
+  /* display: flex; */
   height: 100%;
-  width:100%;
+  width: 100%;
 }
 .player-entry-cover-image {
   position: relative;
@@ -318,13 +318,14 @@ export default {
 }
 .player-wrap {
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column;
   align-items: space-between;
-  justify-content: space-between;
+  justify-content: space-between; */
   /* border-radius: 0 10px 10px 0; */
   transition: all 0.2s ease;
-  background: linear-gradient(-45deg, rgb(83, 83, 83) , rgb(145, 145, 145) );
+  background: linear-gradient(-45deg, rgb(83, 83, 83), rgb(145, 145, 145));
+  height: 100%;
 }
 .player-entry {
   height: 100%;
@@ -353,44 +354,54 @@ export default {
   flex-shrink: 0;
 }
 .player-cover:hover {
-  /* transform: scale(1.05); */
-  transition: all 0.2s cubic-bezier(0.34, 0.07, 0, 0.87);
+  /* transform: scale(1.05);
+  transition: all 0.2s cubic-bezier(0.34, 0.07, 0, 0.87); */
 }
 .player-cover:active {
-  transform: scale(0.95);
-  transition: all 0.2s cubic-bezier(0.34, 0.07, 0, 0.87);
+  /* transform: scale(0.95);
+  transition: all 0.2s cubic-bezier(0.34, 0.07, 0, 0.87); */
+  filter:brightness(70%);
 }
 .player-cover-image {
   position: relative;
   width: 100%;
-  z-index: 1000;
+  /* z-index: 1000; */
 }
 
 .player-expanded-content {
-  z-index:100000;
-  position:absolute;
-  top:calc(var(--audio-content-height) + 20px);
-  left:20px;
-  background: #fff;
+  /* z-index:10000; */
+
   /* width: 50vw; */
-  margin:10px;
-  border-radius: 10px;
+  /* margin:10px; */
+  /* border-radius: 10px; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: center;
   /* border-top: 5px solid #92929213; */
   transition: all 0.2s ease;
-  max-height: 500px;
   overflow: scroll;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--elem-color);
+  padding: 20px;
+  height: 100%;
 }
 .player-info {
   color: var(--main-color);
-  color:#fff;
+  color: #fff;
   display: flex;
   flex-direction: column;
   margin: 10px 0;
   flex: 1;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 3px 5px;
+}
+.player-info:active {
+  /* transform: scale(0.95);
+  transition: all 0.2s cubic-bezier(0.34, 0.07, 0, 0.87); */
+  background: #00000023;
 }
 .player-control-area {
   width: var(--audio-content-width);
@@ -403,7 +414,7 @@ export default {
 .player-control-btn-medium,
 .player-control-btn-small {
   color: var(--main-color);
-  color:#fff;
+  color: #fff;
   border-radius: 50%;
   flex-shrink: none;
   /* background: #000; */
@@ -428,7 +439,7 @@ export default {
   background: var(--main-color-opa);
   border-radius: 50%;
   transition: all 0.2s ease;
-  margin:0 10px 0 0;
+  margin: 0 10px 0 0;
 }
 
 .player-control-btn-playpause:hover,
@@ -456,12 +467,12 @@ export default {
   height: var(--audio-content-height);
 }
 .player-info-title {
-  font-size:24px;
+  font-size: 24px;
   /* font-family: 'Google Sans'; */
   font-weight: 800;
 }
 .player-info-artist {
-  font-size:19px;
+  font-size: 19px;
 }
 .media-list {
   /* max-height: 0; */
@@ -469,25 +480,29 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: space-between;
-  justify-content: space-between;
+  justify-content: center;
+  height: 100%;
 }
 .media-item {
-  width: 100%;
+  /* width: 100%; */
   padding: 10px 12px;
+  box-sizing: border-box;
   border-bottom: 1px solid var(--main-color-opa);
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   cursor: pointer;
+  /* border-radius: 5px; */
 }
 .media-item:last-child {
   border-bottom: none;
 }
-.media-item:hover {
+/* .media-item:hover {
   background: #00000023;
   transition: all 0.2s ease;
-}
+} */
 .media-item:active {
-  background: #00000033;
+  background: var(--first-assist-color);
   /* transition: all 0.2s ease; */
 }
 .media-item-image {
@@ -502,7 +517,12 @@ export default {
 }
 .media-item-content {
   margin: 0 0 0 10px;
-  display:flex;
+  display: flex;
   flex-direction: column;
+  color: var(--main-color);
+}
+.card-details{
+  color: var(--inactive-color);
+
 }
 </style>

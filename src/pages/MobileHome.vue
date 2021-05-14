@@ -19,7 +19,7 @@
         </swiper-slide>
 
         <swiper-slide class="force-width fake-margin oline">
-          <div class="mobile-tool-item">
+          <div class="mobile-tool-item mobile-tool-item-gel">
             <Player />
           </div>
         </swiper-slide>

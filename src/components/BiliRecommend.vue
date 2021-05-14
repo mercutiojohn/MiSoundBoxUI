@@ -352,10 +352,10 @@ export default {
         })
         .catch(console.error);
     },
-    async getCover(url,index) {
+    getCover(url,index) {
       let coverUrl = encodeURIComponent(url);
       let base;
-      await this.$axios
+      this.$axios
         .get(this.$store.state.apiPath + "/bilibili/get-cover?url=" + coverUrl)
         .then(({ data }) => {
           console.log("got:" + index +" "+coverUrl);
@@ -363,6 +363,8 @@ export default {
           return base;
         })
         .catch(console.error);
+      return base;
+
     },
     getAllCover() {
       let _this = this;
