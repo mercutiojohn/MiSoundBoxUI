@@ -1,33 +1,30 @@
 <template>
   <div id="countdown">
-
-    
-    <!-- <div class="countdown-header">
-      <div :class="{'countdown-closed':true,'countdown-closed-hidden':expand}">
-        <div class="countDown-title">{{ year }} 考研</div>
-        <div class="countdown-closed-days">
-          {{ days }}
+    <transition name="fade">
+      <div class="countdown-choose" v-if="expand">
+        <div
+          class="countdown-choose-item"
+          v-for="(item, i) in dates"
+          :key="i"
+          @click="(index = i), (expand = false)"
+        >
+          {{ item.name }}
         </div>
-        <div id="countDown-title">天</div>
       </div>
-      <div class="countdown-expand" @click="changeExpand()">
-      <i
-        :class="{
-          iconfont: true,
-          'icon-chevron-up': expand,
-          'icon-chevron-down': !expand,
-          'left-info-icon': true,
-        }"
-      ></i>
-    </div>
-    </div> -->
-    <div :class="{'countdown-expanded':true,'countdown-expanded-hidden':!expand}">
-      <div class="countdown-days">
-        {{ days }}<span class="countDown-label">天</span>
+    </transition>
+    <transition name="fade">
+      <div class="countdown-expanded" v-if="!expand">
+        <div class="countdown-days">
+          {{ days }}<span class="countDown-label">天</span>
+        </div>
+        <div class="countdown-title" @click="expand = true">
+          {{
+            year + Number(dates[index].year_type ? dates[index].year_type : 0)
+          }}
+          {{ dates[index].name }}
+        </div>
       </div>
-      <div class="countDown-title"> {{ year }} 考研</div>
-    </div>
-    
+    </transition>
   </div>
 </template>
 
@@ -37,24 +34,51 @@ export default {
   data() {
     return {
       year: "",
-      expand: true,
+      expand: false,
+      index: 0,
+      dates: [
+        {
+          name: "考研",
+          date: "Dec 22",
+          year_type: "1",
+        },
+        {
+          name: "公考",
+          date: "Mar 27",
+        },
+        {
+          name: "高考",
+          date: "Jun 7",
+        },
+        {
+          name: "上半年四六级",
+          date: "Jun 12",
+        },
+        {
+          name: "下半年四六级",
+          date: "Dec 11",
+        },
+      ],
+      selfName: "",
+      selfDate: "",
     };
   },
   watch: {
-    expand(value) {
-      if (value) localStorage.kaoyan_status = 1;
-      else {
-        localStorage.kaoyan_status = 0;
-      }
+    index(value) {
+        localStorage.countdown_index = value;
     },
   },
   computed: {
     days: function () {
+      var currYear = new Date().getFullYear();
+      this.year = currYear;
       var today = new Date(); //当前时间
       var h = today.getHours();
       var m = today.getMinutes();
       var s = today.getSeconds();
-      var stopTime = new Date("Dec 22 2021 00:00:00"); //结束时间
+      var stopTime = new Date(
+        this.dates[this.index].date + " " + currYear + " 00:00:00"
+      ); //结束时间
       var stopH = stopTime.getHours();
       var stopM = stopTime.getMinutes();
       var stopS = stopTime.getSeconds();
@@ -72,6 +96,15 @@ export default {
           shengyuM * 60 * 1000) /
           1000
       ); //除去天、小时、分的毫秒数转化为秒
+      if (shengyuD < 0) {
+        shengyuD =
+          shengyuD +
+          365 +
+          Number(
+            currYear % 4 == 0 && (currYear % 100 != 0 || currYear % 400 == 0)
+          );
+        this.year = currYear + 1;
+      }
       return shengyuD;
     },
   },
@@ -90,9 +123,9 @@ export default {
     this.timer = new Date();
   },
   mounted() {
-    if (localStorage.kaoyan_status)
-      this.expand = Number(localStorage.kaoyan_status);
     this.year = new Date().getFullYear();
+    if (localStorage.countdown_index)
+      this.index = Number(localStorage.countdown_index);
   },
 };
 </script>
@@ -100,13 +133,13 @@ export default {
 <style>
 #countdown {
   /* color: var(--main-color); */
-  display: flex;
-  flex-direction: column;
-  transition: all .2s ease;
-  background: linear-gradient(-45deg, rgb(247, 21, 115) , rgb(132, 0, 255) );
-  background: linear-gradient(-45deg, rgb(247, 21, 21) , rgb(111, 0, 255) );
+  /* display: flex; */
+  /* flex-direction: column; */
+  transition: all 0.2s ease;
+  background: linear-gradient(-45deg, rgb(247, 21, 115), rgb(132, 0, 255));
+  background: linear-gradient(-45deg, rgb(247, 21, 21), rgb(111, 0, 255));
   /* background: linear-gradient(-45deg, rgb(21, 247, 198) , rgb(190, 204, 0) ); */
-  
+
   color: #fff;
   height: 100%;
 }
@@ -125,7 +158,7 @@ export default {
   display: flex;
   align-items: center;
   cursor: pointer;
-  flex-grow:0;
+  flex-grow: 0;
   /* height: min-content; */
 }
 .countdown-expand:hover {
@@ -144,14 +177,14 @@ export default {
   justify-content: flex-end;
   flex-wrap: wrap-reverse;
 }
-.countdown-closed{
+.countdown-closed {
   width: 100%;
   display: flex;
   flex: 1;
   align-items: center;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
-.countdown-closed-hidden{
+.countdown-closed-hidden {
   opacity: 0;
 }
 .countdown-expanded {
@@ -159,12 +192,15 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 20px 0 0 20px;
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
   overflow: hidden;
-  max-height: 200px;
-  transition: all .3s;
+  /* max-height: 200px; */
+  /* transition: all 0.3s ease; */
 }
-.countdown-expanded-hidden{
+.countdown-expanded-hidden {
   max-height: 0;
   padding: 0;
   opacity: 0;
@@ -175,12 +211,41 @@ export default {
     Bookerly;
   margin: 0 5px 5px;
 } */
-.countDown-label{
+.countDown-label {
   font-size: 30px;
+}
+
+.countdown-choose {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: var(--elem-color);
+  color: var(--main-color);
+  width: 100%;
+  box-sizing: border-box;
+}
+.countdown-choose-item {
+  padding: 10px;
+  border-bottom: 1px solid #00000013;
+  cursor: pointer;
+  border-radius: 10px;
+  transition:all .2s ease;
+}
+.countdown-choose-item:active{
+  background: var(--first-assist-color);
 
 }
-.countDown-title{
+.countdown-choose-item:last-child {
+  border-bottom: none;
+}
+.countdown-title {
   font-size: 20px;
-  
+  padding: 3px;
+  cursor: pointer;
+}
+.countdown-title:active {
+  border-radius: 5px;
+  background: #00000034;
 }
 </style>

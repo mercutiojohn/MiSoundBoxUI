@@ -116,7 +116,11 @@ export default {
     };
   },
   computed: {},
-  watch: {},
+  watch: {
+    city(newCity){
+      localStorage.weather_city = newCity;
+    }
+  },
   methods: {
     searchWeather: async function () {
       this.loading = true;
@@ -144,14 +148,14 @@ export default {
       let locUrl = `https://geoapi.qweather.com/v2/city/lookup?location=${this.city}&key=${key}`;
       let locRes = await fetch(locUrl);
       let locResult = await locRes.json();
-      console.log(locResult);
+      // console.log(locResult);
       let id = locResult.location[0].id;
       this.resGeo = locResult;
       //根据城市id获取具体的天气
       let httpUrl1 = `https://devapi.qweather.com/v7/weather/now?location=${id}&key=${key}`;
       let weatherRes = await fetch(httpUrl1);
       let weatherResult = await weatherRes.json();
-      console.log(weatherResult);
+      // console.log(weatherResult);
       this.resWeatherContent = weatherResult.now;
 
       let nowWeather = weatherResult.now;
@@ -161,7 +165,7 @@ export default {
       let airUrl = `https://devapi.qweather.com/v7/air/now?location=${id}&key=${key}`;
       let airRes = await fetch(airUrl);
       let airResult = await airRes.json();
-      console.log(airResult);
+      // console.log(airResult);
       this.airInfo = airResult.now;
 
       let nowAir = airResult.now;
@@ -171,7 +175,7 @@ export default {
       let warnUrl = `https://devapi.qweather.com/v7/warning/now?location=${id}&key=${key}`;
       let warnRes = await fetch(warnUrl);
       let warnResult = await warnRes.json();
-      console.log(warnResult);
+      // console.log(warnResult);
       this.warning = warnResult.warning;
       this.loading = false;
     },
@@ -221,6 +225,9 @@ export default {
   created() {},
   mounted() {
     this.searchWeather();
+    if (localStorage.weather_city)
+      this.city = localStorage.weather_city;
+    
   },
   beforeDestroy() {},
 };
@@ -235,12 +242,15 @@ hello {
   height: 100%;
   background: linear-gradient(45deg, rgb(0, 140, 255), rgb(36, 211, 255));
   user-select: none;
+  box-sizing: border-box;
+
 }
 .weather-content {
   min-height: 100%;
   padding: 20px;
   /* color: var(--main-color); */
   color: #fff;
+  box-sizing: border-box;
 }
 .weather-loading {
   height: 100%;
@@ -248,7 +258,13 @@ hello {
   align-items: center;
   justify-content: center;
 }
-.city {
+.city{
+  padding: 3px;
+  cursor: pointer;
+}
+.city:active {
+  border-radius: 5px;
+  background: #00000034;
 }
 .tmp-n-brief {
   /* display: flex; */
@@ -309,6 +325,7 @@ hello {
   border-radius: 25px;
   transition: all 0.2s ease;
   margin: 0 10px;
+  cursor: pointer;
 }
 .options button:active {
   background: var(--accent-color);

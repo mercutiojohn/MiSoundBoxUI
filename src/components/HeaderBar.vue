@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'header-bar-container':true,'header-bar-container-bgon':bgEnable, 'header-bar-container-bg-no-blur':clockBoxStat&&bgEnable}">
+  <div class="header-bar-container">
     <!-- <ul class="header-bar-tablist"  @click="printPath()">
       <router-link to="/">
         <li :class="{'header-bar-tabitem':true,'header-bar-tabitem-bgon':bgEnable,'header-bar-tabitem-active':currTab == '/'}">首页</li>
@@ -10,7 +10,7 @@
 
     </ul> -->
     <div class="header-bar-right">
-      <ClockBox :bgEnable="bgEnable"/>
+      <ClockBox />
       <!-- <a href="settings://">123</a> -->
     </div>
     
@@ -57,7 +57,7 @@ export default {
       // let offsetTop = document.querySelector("body").offsetTop;
       // console.log(scrollTop);
       // console.log(offsetTop);
-      console.log(this.$store.state.clockBoxStat);
+      // console.log(this.$store.state.clockBoxStat);
       if (scrollTop) {
         this.bgEnable = true;
       } else{

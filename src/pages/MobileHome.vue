@@ -3,17 +3,17 @@
     <div class="mobile-tools-list">
       <swiper :options="swiperOption2">
         <swiper-slide class="first-width fake-margin oline">
-          <div class="mobile-tool-item first-width-inner disable-scroll">
+          <div class="mobile-tool-item first-width-inner disable-scroll mobile-tool-item-gel">
             <DynamicMainContent />
           </div>
         </swiper-slide>
         <swiper-slide class="force-width fake-margin oline">
-          <div class="mobile-tool-item">
+          <div class="mobile-tool-item mobile-tool-item-gel">
             <Weather />
           </div>
         </swiper-slide>
         <swiper-slide class="force-width fake-margin oline">
-          <div class="mobile-tool-item">
+          <div class="mobile-tool-item mobile-tool-item-gel">
             <Countdown />
           </div>
         </swiper-slide>
@@ -29,7 +29,7 @@
           </div>
         </swiper-slide>
         <swiper-slide class="force-width fake-margin oline">
-          <div class="mobile-tool-item">
+          <div class="mobile-tool-item mobile-tool-item-gel">
             <Weibo />
           </div>
         </swiper-slide>
@@ -70,7 +70,7 @@ export default {
     EmbedFrame,
     Weibo,
     BiliRecommend,
-    Weather
+    Weather,
   },
   data() {
     return {
@@ -83,6 +83,8 @@ export default {
         direction: "horizontal",
         spaceBetween: 0,
         slidesPerView: "auto",
+        observer: true, //修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true, //修改swiper的父元素时，自动初始化swiper
         keyboard: {
           enabled: true,
         },
@@ -120,6 +122,7 @@ export default {
 :root {
   --medium-width: calc(100vh - 64px);
   --large-width: calc(100vw - 100px);
+  --radius:30px;
 }
 body {
   /* background: #000; */
@@ -146,7 +149,7 @@ body {
   height: 100%;
   /* margin: 0 0 0 20px; */
   background: var(--elem-color);
-  border-radius: 30px;
+  border-radius: var(--radius);
   /* box-shadow: 0 2px 6px 1px #00000014; */
   /* background: #ffffff75;
   backdrop-filter: blur(30px) saturate(180%);
@@ -157,9 +160,8 @@ body {
   flex-shrink: 0;
   /* min-width: calc(100vh - 64px); */
   max-width: calc(100vw - 20px);
-  transition: all .1s ease;
+  transition: all 0.1s ease;
   /* transition-delay: 50ms; */
-
 }
 .mobile-tool-item:first-child {
   /* overflow: hidden; */
@@ -169,10 +171,9 @@ body {
 /* .mobile-tool-item:last-child{
   outline:10px
 } */
-.mobile-tool-item:active{
-  transform: scale(.98);
+.mobile-tool-item-gel:active {
+  transform: scale(0.98);
   transition-delay: 0;
-
 }
 .force-width {
   width: var(--medium-width);
@@ -193,12 +194,10 @@ body {
   overflow: hidden;
 }
 .swiper-slide {
-  transition:all .2s ease;
+  transition: all 0.2s ease;
 }
 
-
 .swiper-slide-prev {
-    transform: scale(0.86);
-
+  transform: scale(0.86);
 }
 </style>

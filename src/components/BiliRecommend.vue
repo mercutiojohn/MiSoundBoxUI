@@ -3,34 +3,48 @@
     <!-- <div class="bili-item" v-for="(item,index) in data" :key="index">
       <a :href="item.url"><span class="bili-content">{{ item.title }}</span></a>
       </div> -->
-    <div class="bili-item">
-      <a :href="'https://www.bilibili.com/video/av' + data[0].args.aid">
-        <div class="item-cover">
-          <img :src="getCover(data[0].cover)" alt="" srcset="" />
-        </div>
-        <div class="item-content">
-          <span class="item-title">
-            {{ data[0].title }}
-          </span>
-          <div class="item-desc">
-            <div class="desc-first-line">
-              <span class="desc-name">{{ data[0].args.up_name }}</span>
-              <span class="desc-cate"
-                >{{ data[0].desc_button.text }}<br
-              /></span>
+    <swiper :options="biliSwiperOptions">
+      <swiper-slide
+        v-for="(item, index) in data"
+        :key="index"
+        class="bili-slide"
+      >
+        <div class="bili-item">
+          <a :href="getVidUrl(item)" :target="!toApp ? '_blank' : ''">
+            <div class="item-cover">
+              <img :src="getCover(item.cover,index)" alt="" srcset="" />
+              <!-- <img :src="covers[0]" alt="" srcset="" /> -->
+              <!-- <img :src="getCover(item.cover,index)" alt="" srcset="" /> -->
+              <!-- <img :src="getCover(item.cover,index)" alt="" srcset="" /> -->
             </div>
-            <div class="desc-second-line">
-              <span class="desc-plays"
-                >播放{{ data[0].cover_left_text_1 }}</span
-              >
-              <span class="desc-danmakus"
-                >弹幕{{ data[0].cover_left_text_2 }}</span
-              >
+            <div class="item-content">
+              <span class="item-title">
+                {{ item.title }}
+              </span>
+              <div class="item-desc">
+                <div class="desc-first-line">
+                  <span class="desc-name">{{ item.args.up_name }}</span>
+                  <span class="desc-cate"
+                    >{{ item.desc_button.text }}<br
+                  /></span>
+                </div>
+                <div class="desc-second-line">
+                  <span class="desc-plays">
+                    播放 {{ item.cover_left_text_1 }}
+                  </span>
+                  <span class="desc-danmakus">
+                    弹幕 {{ item.cover_left_text_2 }}
+                  </span>
+                  <span class="desc-length">
+                    时长 {{ item.cover_right_text }}
+                  </span>
+                </div>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
-      </a>
-    </div>
+      </swiper-slide>
+    </swiper>
   </div>
 </template>
 
@@ -41,6 +55,27 @@ export default {
     return {
       timer: "",
       cover_0: "",
+      toApp: true,
+      covers: [],
+      index: 0,
+      timer_fetch: "",
+      biliSwiperOptions: {
+        // autoplay: {
+        //   delay: 3000,
+        //   disableOnInteraction: false,
+        // },
+        loop: false,
+        direction: "vertical",
+        spaceBetween: 0,
+        slidesPerView: "auto",
+        longSwipesRatio: 0.2,
+        observer: true, //修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true, //修改swiper的父元素时，自动初始化swiper
+        keyboard: {
+          enabled: true,
+        },
+        autoHeight: true,
+      },
       data: [
         {
           args: {
@@ -56,7 +91,7 @@ export default {
           card_goto: "av",
           card_type: "small_cover_v2",
           cover:
-            "",
+            "http://i0.hdslb.com/bfs/archive/3878ec2eb2813527ea929fbdc213fc9f163ec908.jpg",
           cover_left_icon_1: 1,
           cover_left_icon_2: 3,
           cover_left_text_1: "12.1万",
@@ -171,8 +206,138 @@ export default {
             },
           ],
           title: "正在加载",
-          uri:
-            "",
+          uri: "",
+        },
+        {
+          args: {
+            aid: 803056651,
+            rid: 219,
+            rname: "汪星人",
+            tid: 9955,
+            tname: "汪星人",
+            up_id: 1463519331,
+            up_name: "正在加载",
+          },
+          can_play: 1,
+          card_goto: "av",
+          card_type: "small_cover_v2",
+          cover:
+            "http://i0.hdslb.com/bfs/archive/3878ec2eb2813527ea929fbdc213fc9f163ec908.jpg",
+          cover_left_icon_1: 1,
+          cover_left_icon_2: 3,
+          cover_left_text_1: "0",
+          cover_left_text_2: "0",
+          cover_right_text: "5:01",
+          desc_button: {
+            event: "channel_click",
+            event_v2: "channel",
+            text: "正在加载",
+            type: 1,
+            uri: "bilibili://pegasus/channel/9955",
+          },
+          goto: "av",
+          idx: 1620734408,
+          official_icon: 16,
+          param: "",
+          player_args: {
+            aid: 803056651,
+            cid: 336604845,
+            duration: 301,
+            type: "av",
+          },
+          three_point: {
+            dislike_reasons: [
+              {
+                id: 4,
+                name: "UP主:隔壁老李的矿山日记",
+              },
+              {
+                id: 2,
+                name: "分区:汪星人",
+              },
+              {
+                id: 3,
+                name: "频道:汪星人",
+              },
+              {
+                id: 1,
+                name: "不感兴趣",
+              },
+            ],
+            feedbacks: [
+              {
+                id: 1,
+                name: "恐怖血腥",
+              },
+              {
+                id: 2,
+                name: "色情低俗",
+              },
+              {
+                id: 3,
+                name: "封面恶心",
+              },
+              {
+                id: 4,
+                name: "标题党/封面党",
+              },
+            ],
+            watch_later: 1,
+          },
+          three_point_v2: [
+            {
+              title: "添加至稍后再看",
+              type: "watch_later",
+            },
+            {
+              reasons: [
+                {
+                  id: 1,
+                  name: "恐怖血腥",
+                },
+                {
+                  id: 2,
+                  name: "色情低俗",
+                },
+                {
+                  id: 3,
+                  name: "封面恶心",
+                },
+                {
+                  id: 4,
+                  name: "标题党/封面党",
+                },
+              ],
+              subtitle: "(选择后将优化首页此类内容)",
+              title: "反馈",
+              type: "feedback",
+            },
+            {
+              reasons: [
+                {
+                  id: 4,
+                  name: "UP主:隔壁老李的矿山日记",
+                },
+                {
+                  id: 2,
+                  name: "分区:汪星人",
+                },
+                {
+                  id: 3,
+                  name: "频道:汪星人",
+                },
+                {
+                  id: 1,
+                  name: "不感兴趣",
+                },
+              ],
+              subtitle: "(选择后将减少相似内容推荐)",
+              title: "不感兴趣",
+              type: "dislike",
+            },
+          ],
+          title: "正在加载",
+          uri: "",
         },
       ],
     };
@@ -180,7 +345,6 @@ export default {
 
   methods: {
     getBili() {
-      console.log("hello");
       this.$axios
         .get(this.$store.state.apiPath + "/bilibili/main")
         .then(({ data }) => {
@@ -188,23 +352,59 @@ export default {
         })
         .catch(console.error);
     },
-    getCover(url) {
+    async getCover(url,index) {
       let coverUrl = encodeURIComponent(url);
-      this.$axios
+      let base;
+      await this.$axios
         .get(this.$store.state.apiPath + "/bilibili/get-cover?url=" + coverUrl)
         .then(({ data }) => {
-          this.cover_0 = "data:image/jpg;base64," + data;
-          return "data:image/jpg;base64," + data;
+          console.log("got:" + index +" "+coverUrl);
+          base = "data:image/jpg;base64,"+data;
+          return base;
         })
         .catch(console.error);
-      return this.cover_0;
+    },
+    getAllCover() {
+      let _this = this;
+      for (var i = 0; i < this.data.length; i++) {
+        // this.covers[i] = this.getCover(_this.data[i].cover,i);
+        this.getCover(_this.data[i].cover,i);
+      }
+    },
+
+    getVidUrl(data) {
+      if (this.toApp) return data.uri;
+      else return "https://www.bilibili.com/video/av" + data.args.aid;
     },
   },
   created() {
-    this.timer = setInterval(this.getBili(), 1000);
+    
   },
   mounted() {
-    // this.getBili();
+    if (localStorage.bili_data) {
+      this.data = JSON.parse(localStorage.bili_data);
+    }
+    this.timer_fetch = setTimeout(this.getBili(), 600000);
+  },
+  watch: {
+    data(newVal) {
+      localStorage.bili_data = JSON.stringify(newVal);
+    },
+    // covers(newVal) {
+    //   var i = 0;
+    //   newVal.forEach((element) => {
+    //     window.localStorage.setItem("bili_cover_" + i, element);
+    //     i++;
+    //   });
+    // },
+  },
+  beforeDestroy() {
+    localStorage.bili_data = JSON.stringify(this.data);
+    var i = 0;
+    this.covers.forEach((element) => {
+      window.localStorage.setItem("bili_cover_" + i, element);
+      i++;
+    });
   },
 };
 </script>
@@ -213,7 +413,6 @@ export default {
 :root {
   --content-max-width: calc(var(--large-width));
   --content-max-height: calc(var(--medium-width));
-
 }
 .bili {
   /* background-color: linear-gradient(#b66969,#0080ff) ; */
@@ -233,7 +432,18 @@ export default {
   /* height: 100%; */
   flex-direction: column;
 }
+.bili-slide {
+  transition: all 0.2s ease;
+}
+.bili-slide:active {
+  transform: scale(0.98);
+}
 .bili-item {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 0 0 10px 0;
+  /* border-radius: var(--radius); */
+  /* overflow: hidden; */
 }
 .bili-content {
   /* text-shadow: 0 0 20px #00000094; */
@@ -249,7 +459,7 @@ export default {
   color: var(--elem-color);
 }
 .item-cover {
-    background: #000;
+  background: #000;
   width: var(--content-max-width);
   height: var(--content-max-height);
   /* overflow: hidden; */
@@ -262,11 +472,11 @@ export default {
   width: 100%;
 }
 .item-content {
-width: var(--content-max-width);
-box-sizing: border-box;
+  width: var(--content-max-width);
+  box-sizing: border-box;
   position: absolute;
-  bottom: 0;
-  background-image: linear-gradient(#00000000,#000000ee);
+  bottom: 10px;
+  background-image: linear-gradient(#00000000, #000000ee);
   /* background-color: #00000090; */
   padding: 70px 40px 20px 30px;
   border-radius: 0 0 30px 30px;
@@ -281,7 +491,7 @@ box-sizing: border-box;
   max-height: 64px;
   text-overflow: ellipsis;
   /* white-space: pre-wrap; */
-  overflow: hidden; 
+  overflow: hidden;
   /*
   display: -webkit-box;
   -webkit-box-orient: vertical;

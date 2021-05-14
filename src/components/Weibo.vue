@@ -60,7 +60,12 @@ export default {
     flex-direction: column;
 }
 .weibo-item{
-  margin:10px 0;
+  padding:3px 0;
+  margin: 7px 0;
+  border-radius: 5px;
+}
+.weibo-item:active{
+  background: var(--first-assist-color);
 }
 .weibo-content {
   /* text-shadow: 0 0 20px #00000094; */
