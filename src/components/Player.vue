@@ -32,7 +32,7 @@
         </div>
       </transition>
       <transition name="fade" type="out-in">
-        <div class="player-entry" v-if="!playerWrapDisplay"  @click="changeWrapState">
+        <div class="player-entry" v-if="!playerWrapDisplay">
           <div class="player-cover">
             <!-- <video
             id="myVideo"
@@ -58,7 +58,7 @@
               srcset=""
             />
           </div>
-          <div class="player-info">
+          <div class="player-info" @click="changeWrapState">
             <span class="player-info-title">{{ audioTitle }}</span>
             <span class="player-info-artist">{{ artist }}</span>
           </div>

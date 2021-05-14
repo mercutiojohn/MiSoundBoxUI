@@ -229,7 +229,7 @@ export default {
   padding: 10px;
   border-bottom: 1px solid #00000013;
   cursor: pointer;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   transition:all .2s ease;
 }
 .countdown-choose-item:active{
