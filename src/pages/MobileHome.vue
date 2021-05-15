@@ -198,6 +198,6 @@ body {
 }
 
 .swiper-slide-prev {
-  transform: scale(0.86);
+  /* transform: scale(0.86); */
 }
 </style>

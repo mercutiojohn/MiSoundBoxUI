@@ -160,6 +160,7 @@ export default {
     /* zoom: 0.2; */
     box-sizing: border-box;
     height: max-content;
+    height: 100%;
     display: flex;
     flex-direction: column;
   }

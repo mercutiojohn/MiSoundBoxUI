@@ -6,14 +6,7 @@
       v-on:click="changeWrapState('display')"
     >
       
-      <!-- <span
-        id="clockbox-week"
-        :class="bgStatus ? 'bg-text-style' : '' + handleBgOn()"
-      >
-        第
-        <span id="digits">{{ week }}</span
-        >周
-      </span> -->
+      
       
       <span
         id="clockbox-time-content"
@@ -89,6 +82,8 @@ export default {
   data() {
     return {
       timer:'',
+      date:"",
+      // currentTime: new Date(),
       currUrl: 0,
       url: [
         "https://app.raindrop.io/my/0",
@@ -101,6 +96,7 @@ export default {
       clockWrapDisplay: false,
       clockPreferences: {
         twelveFormat: true,
+        showSecond:false
       },
       currentDate: new Date(),
       clockWrapExpand: false,
@@ -144,33 +140,19 @@ export default {
       var h = today.getHours();
       var m = today.getMinutes();
       var s = today.getSeconds();
-      // add a zero in front of numbers<10
+      // add a zero in front of numbers <10
       m = this.checkTime(m);
       s = this.checkTime(s);
 
       if (this.clockPreferences.twelveFormat) {
-        // h = '下午' + (h % 12);
-        if (h / 12 >= 1) {
-          this.clockPreferences.twelveLabel = "下午";
-        } else {
-          this.clockPreferences.twelveLabel = "上午";
-        }
-        h = h % 12;
-        // TODO
+        this.clockPreferences.twelveLabel = (h / 12 >= 1)?"下午":"上午";
+        h = (h==12)?h:h%12;
       }
-
-      var result = h + ":" + m;
-
-      if (this.clockPreferences.showSecond) {
-        result = h + ":" + m + ":" + s;
-      }
+      var result =(this.clockPreferences.showSecond)? (h + ":" + m + ":" + s):(h + ":" + m);
       return result;
     },
     checkTime(i) {
-      if (i < 10) {
-        i = "0" + i;
-      }
-      return i;
+      return (i<10)?"0"+i:i;
     },
     handleBgOn() {
       if (this.bgEnable) {
@@ -181,10 +163,10 @@ export default {
     },
   },
   created() {
-    this.date = this.getTime();
+    // this.date = this.getTime();
     let _this = this;
-    this.timer = setInterval(()=>{
-      _this.date = this.getTime();
+    this.timer = setInterval(function(){
+      _this.date = _this.getTime();
     },1000);
     
   },

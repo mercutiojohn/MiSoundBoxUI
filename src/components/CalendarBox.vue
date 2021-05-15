@@ -14,10 +14,10 @@
       <!-- <span class="block month-content"><span id="month"></span>月</span> -->
       <span class="block-today week-content">星期{{ week }}</span>
       <span class="block-today week-content">
-        <!-- <span v-if="schoolWeek < 0">开学还有</span> -->
-        <!-- <span v-else>第</span>
-          {{Math.abs(schoolWeek)}}
-          周 -->
+        <span v-if="schoolWeek < 0">开学还有</span>
+        <span v-else>第</span>
+          {{Math.abs(newWeek)}}
+          周
       </span>
       <!-- <span class="block-today time-content" id="localtime">{{localtime}}</span> -->
     </div>
@@ -132,7 +132,7 @@ export default {
       // document.getElementById("month").innerHTML = this.showDate(today, 'm');
       // document.getElementById("day").innerHTML = this.showDate(today, 'd');
       // document.getElementById("week").innerHTML = this.showDate(today, 'w');
-      window.setTimeout("tick()", 1000);
+      setTimeout(this.tick(), 1000);
     },
   },
   computed: {
@@ -155,10 +155,28 @@ export default {
       var nowdate = totalDays % 7;
       return week + 1;
     },
+    newWeek: function () {
+      function getYearWeek(date) {
+        var date2 = new Date(date.getFullYear(), 0, 1);
+        var day1 = date.getDay();
+        if (day1 == 0) day1 = 7;
+        var day2 = date2.getDay();
+        if (day2 == 0) day2 = 7;
+        var d = Math.round(
+          (date.getTime() -
+            date2.getTime() +
+            (day2 - day1) * (24 * 60 * 60 * 1000)) /
+            86400000
+        );
+        return Math.ceil(d / 7) + 1;
+      }
+      var start = new Date(2021, 3, 1);
+      return getYearWeek(start);
+    },
   },
   created() {
     this.tick();
-  },
+  }
 };
 </script>
 

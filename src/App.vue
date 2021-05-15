@@ -14,13 +14,7 @@
         </div>
       <!-- </swiper-slide> -->
       <!-- <swiper-slide> -->
-        <EmbedFrame
-          url="https://www.dida365.com/webapp/#q/all/today"
-          title="滴答清单"
-          height="calc(100vh - 1px)"
-          :hideExpand="true"
-          :hideActionBar="true"
-        />
+        <SubPage />
       <!-- </swiper-slide> -->
       <!-- <swiper-slide class=""></swiper-slide> -->
     <!-- </swiper> -->
@@ -28,13 +22,13 @@
 </template>
 <script>
 import HeaderBar from "@/components/HeaderBar";
-import EmbedFrame from "@/components/EmbedFrame";
+import SubPage from "@/pages/SubPage";
 
 export default {
   name: "App",
   components: {
     HeaderBar,
-    EmbedFrame,
+    SubPage
   },
   mounted() {
     const script = document.createElement("script");
