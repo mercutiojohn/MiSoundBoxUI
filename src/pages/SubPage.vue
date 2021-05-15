@@ -3,6 +3,11 @@
     <swiper :options="swiperOption">
       <swiper-slide class="sub-slide">
         <div class="slider slider-left"></div>
+        <BigClock />
+        <div class="slider slider-right"></div>
+      </swiper-slide>
+      <swiper-slide class="sub-slide">
+        <div class="slider slider-left"></div>
         <EmbedFrame
           url="https://www.dida365.com/webapp/#q/all/today"
           title="滴答清单"
@@ -12,15 +17,10 @@
         />
         <div class="slider slider-right"></div>
       </swiper-slide>
-      <swiper-slide class="sub-slide">
-        <div class="slider slider-left"></div>
-        <BigClock />
-        <div class="slider slider-right"></div>
-      </swiper-slide>
+
       <swiper-slide class="sub-slide">
         <DynamicMainContent />
       </swiper-slide>
-      
     </swiper>
   </div>
 </template>
@@ -35,7 +35,7 @@ export default {
   components: {
     EmbedFrame,
     DynamicMainContent,
-    BigClock
+    BigClock,
   },
   data() {
     return {
@@ -78,20 +78,23 @@ export default {
   overflow: hidden;
 }
 .slider {
-  width: 30px;
+  width: 50px;
   background: transparent;
   top: calc(50vh - 50px);
   height: 100px;
   position: absolute;
   top: 0;
-  height: 100vh;
+  height: 100vh
+}.slider:active {
+  background: var(--first-assist-color);
+  
 }
 .slider-left {
-  /* border-radius: 0 20px 20px 0; */
+  border-radius: 0 20px 20px 0;
   left: 0;
 }
 .slider-right {
-  /* border-radius: 20px 0 0 20px; */
+  border-radius: 20px 0 0 20px;
   right: 0;
 }
 </style>
