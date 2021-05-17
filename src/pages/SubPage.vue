@@ -70,12 +70,6 @@ export default {
   overflow: hidden;
   background: var(--bg-color-dark);
 }
-.sub-slide {
-  /* width:100%; */
-  /* border-radius: 30px; */
-  height: 100vh;
-  overflow: hidden;
-}
 .scroll{
   overflow: scroll;
 }
@@ -99,9 +93,8 @@ export default {
   border-radius: 20px 0 0 20px;
   right: 0;
 }
-</style>
-<style>
 .sub-page .swiper-slide{
+  height: 100vh;
   overflow: hidden;
 }
 .sub-page .swiper-slide-prev,.sub-page .swiper-slide-next {
