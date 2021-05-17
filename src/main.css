@@ -10,9 +10,12 @@
     /* --bg-url: url(https://picsum.photos/1920/1080); */
     --bg-url: url(https://source.unsplash.com/random/1920x1080);
     --bg-color: #f6f7f9;
+    --bg-color-dark: #17181a;
     --elem-color: #ffffff;
+    --elem-color-dark: #2d2e30;
     --first-assist-color: #eee;
     --main-color: #000000;
+    --main-color-dark: #ffffff;
     --body-color: #f1f3f4;
     --inactive-color: #888;
     --second-main-color: #888;

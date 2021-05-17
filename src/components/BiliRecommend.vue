@@ -12,7 +12,7 @@
         <div class="bili-item">
           <a :href="getVidUrl(item)" :target="!toApp ? '_blank' : ''">
             <div class="item-cover">
-              <img :src="getCover(item.cover,index)" alt="" srcset="" />
+              <img :src="covers[index]" alt="" srcset="" />
               <!-- <img :src="covers[0]" alt="" srcset="" /> -->
               <!-- <img :src="getCover(item.cover,index)" alt="" srcset="" /> -->
               <!-- <img :src="getCover(item.cover,index)" alt="" srcset="" /> -->
@@ -55,7 +55,7 @@ export default {
     return {
       timer: "",
       cover_0: "",
-      toApp: true,
+      toApp: false,
       covers: [],
       index: 0,
       timer_fetch: "",
@@ -344,11 +344,16 @@ export default {
   },
 
   methods: {
+    getItem(thing){
+      console.log(thing);
+      return thing
+    },
     getBili() {
       this.$axios
         .get(this.$store.state.apiPath + "/bilibili/main")
         .then(({ data }) => {
           this.data = data.content.data.items;
+          this.getAllCover();
         })
         .catch(console.error);
     },
@@ -358,19 +363,22 @@ export default {
       this.$axios
         .get(this.$store.state.apiPath + "/bilibili/get-cover?url=" + coverUrl)
         .then(({ data }) => {
-          console.log("got:" + index +" "+coverUrl);
+          // console.log("got:" + index +" "+coverUrl);
           base = "data:image/jpg;base64,"+data;
-          return base;
+          this.covers[index] = base;
+          this.$forceUpdate();
         })
         .catch(console.error);
-      return base;
+      return this.covers[index];
 
     },
     getAllCover() {
       let _this = this;
       for (var i = 0; i < this.data.length; i++) {
+        console.log("get the "+i+" cover")
         // this.covers[i] = this.getCover(_this.data[i].cover,i);
         this.getCover(_this.data[i].cover,i);
+          // this.$forceUpdate();
       }
     },
 
@@ -461,7 +469,7 @@ export default {
   color: var(--elem-color);
 }
 .item-cover {
-  background: #000;
+  background: rgb(55, 165, 255);
   width: var(--content-max-width);
   height: var(--content-max-height);
   /* overflow: hidden; */
@@ -472,6 +480,7 @@ export default {
 }
 .item-cover > img {
   width: 100%;
+  min-height:100%;
 }
 .item-content {
   width: var(--content-max-width);
@@ -490,7 +499,7 @@ export default {
   margin: 0 0 10px 0;
   color: #ffffff;
   font-weight: 800;
-  max-height: 64px;
+  max-height: 58px;
   text-overflow: ellipsis;
   /* white-space: pre-wrap; */
   overflow: hidden;
@@ -503,7 +512,21 @@ export default {
   font-size: 15px;
   color: #bebebede;
   /* z-index: 100; */
+  flex-direction: column;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+}
+.item-desc .desc-first-line{
+  /* max-width: 50%; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.item-desc .desc-second-line{
+  /* max-width: 50%; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex:1 0;
 }
 </style>

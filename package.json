@@ -14,6 +14,7 @@
         "aplayer": "^1.10.1",
         "axios": "^0.21.1",
         "element-ui": "^2.15.1",
+        "flv.js": "^1.5.0",
         "monaco-editor": "^0.23.0",
         "monaco-editor-webpack-plugin": "^3.0.1",
         "swiper": "^6.5.9",

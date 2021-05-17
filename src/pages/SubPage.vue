@@ -2,11 +2,9 @@
   <div class="sub-page">
     <swiper :options="swiperOption">
       <swiper-slide class="sub-slide">
-        <div class="slider slider-left"></div>
         <BigClock />
-        <div class="slider slider-right"></div>
       </swiper-slide>
-      <swiper-slide class="sub-slide">
+      <!-- <swiper-slide class="sub-slide">
         <div class="slider slider-left"></div>
         <EmbedFrame
           url="https://www.dida365.com/webapp/#q/all/today"
@@ -16,7 +14,7 @@
           :hideActionBar="true"
         />
         <div class="slider slider-right"></div>
-      </swiper-slide>
+      </swiper-slide> -->
 
       <swiper-slide class="sub-slide">
         <DynamicMainContent />
@@ -70,12 +68,16 @@ export default {
   height: 100vh;
   width: 100%;
   overflow: hidden;
+  background: var(--bg-color-dark);
 }
 .sub-slide {
   /* width:100%; */
   /* border-radius: 30px; */
   height: 100vh;
   overflow: hidden;
+}
+.scroll{
+  overflow: scroll;
 }
 .slider {
   width: 50px;
@@ -96,5 +98,15 @@ export default {
 .slider-right {
   border-radius: 20px 0 0 20px;
   right: 0;
+}
+</style>
+<style>
+.sub-page .swiper-slide{
+  overflow: hidden;
+}
+.sub-page .swiper-slide-prev,.sub-page .swiper-slide-next {
+  border-radius: 40px;
+  transform: scale(0.86);
+
 }
 </style>

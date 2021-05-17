@@ -33,6 +33,7 @@ export default {
       month: "",
       day: "",
       week: "",
+      timer:''
     };
   },
 
@@ -132,7 +133,6 @@ export default {
       // document.getElementById("month").innerHTML = this.showDate(today, 'm');
       // document.getElementById("day").innerHTML = this.showDate(today, 'd');
       // document.getElementById("week").innerHTML = this.showDate(today, 'w');
-      setTimeout(this.tick(), 1000);
     },
   },
   computed: {
@@ -175,7 +175,7 @@ export default {
     },
   },
   created() {
-    this.tick();
+    this.timer = setInterval(this.tick(), 1000);
   }
 };
 </script>

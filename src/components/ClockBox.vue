@@ -5,9 +5,6 @@
       :class="{'clockbox-time-active':clockWrapDisplay}"
       v-on:click="changeWrapState('display')"
     >
-      
-      
-      
       <span
         id="clockbox-time-content"
         :class="bgStatus ? 'bg-text-style' : '' + handleBgOn()"

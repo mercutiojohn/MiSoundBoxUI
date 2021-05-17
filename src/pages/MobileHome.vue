@@ -17,7 +17,11 @@
             <Countdown />
           </div>
         </swiper-slide>
-
+        <swiper-slide class="force-width fake-margin oline">
+          <div class="mobile-tool-item mobile-tool-item-gel">
+            <Weather />
+          </div>
+        </swiper-slide>
         <swiper-slide class="force-width fake-margin oline">
           <div class="mobile-tool-item mobile-tool-item-gel">
             <Player />
@@ -31,6 +35,11 @@
         <swiper-slide class="force-width fake-margin oline">
           <div class="mobile-tool-item mobile-tool-item-gel">
             <Weibo />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="first-width fake-margin oline">
+          <div class="mobile-tool-item first-width">
+            <Television />
           </div>
         </swiper-slide>
       </swiper>
@@ -60,6 +69,7 @@ import EmbedFrame from "@/components/EmbedFrame";
 import Weibo from "@/components/Weibo";
 import BiliRecommend from "@/components/BiliRecommend";
 import Weather from "@/components/Weather";
+import Television from '@/components/Television';
 export default {
   name: "MobileHome",
   components: {
@@ -71,6 +81,7 @@ export default {
     Weibo,
     BiliRecommend,
     Weather,
+    Television
   },
   data() {
     return {

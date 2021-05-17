@@ -1,40 +1,69 @@
 <template>
-  <div id="big-clock">
-    <div
-      id="big-clock-time"
-      :class="{ 'big-clock-time-active': clockWrapDisplay }"
-      v-on:click="changeWrapState('display')"
-    >
-      <span
-        id="big-clock-time-content"
-        :class="bgStatus ? 'bg-text-style' : '' + handleBgOn()"
-      >
-        {{ date }}
-      </span>
-      <span
-        id="big-clock-twelve-label"
-        v-if="clockPreferences.twelveFormat"
-        :class="bgStatus ? 'bg-text-style' : '' + handleBgOn()"
-      >
-        {{ clockPreferences.twelveLabel }}
-      </span>
+  <div class="big-clock">
+    <transition name="trans" type="out-in">
+<div class="big-clock-ticktick" v-show="clockWrapDisplay" >
+      <div class="ticktick-func" @click="clockWrapDisplay = false">
+        <i class="iconfont icon-chevron-down"></i>
+          <!-- <clock-box />
+          <calendar-box /> -->
+
+      </div>
+      <EmbedFrame url="https://www.dida365.com/webapp/#q/all/today"
+          title="滴答清单"
+          height="calc(100vh - 1px)"
+          :hideExpand="true"
+          :hideActionBar="true"/>
     </div>
-    <!-- <div class="tomato-entry">
-      <i class="iconfont icon-chevron-right"></i>
-      <span class="entry-title">
-        25:00
-      </span>
-      <i class="iconfont icon-chevron-right"></i>
-    </div> -->
+    </transition>
+    <transition name="fade" type="out-in">
+    <div id="big-clock-content" v-show="!clockWrapDisplay">
+      <div
+        id="big-clock-time"
+        :class="{ 'big-clock-time-active': clockWrapDisplay }"
+        v-on:click="changeWrapState('display')"
+      >
+        <span
+          id="big-clock-time-content"
+          :class="bgStatus ? 'bg-text-style' : '' + handleBgOn()"
+        >
+          {{ date }}
+        </span>
+        <span
+          id="big-clock-twelve-label"
+          v-if="clockPreferences.twelveFormat"
+          :class="bgStatus ? 'bg-text-style' : '' + handleBgOn()"
+        >
+          {{ clockPreferences.twelveLabel }}
+        </span>
+      </div>
+      <div class="entries">
+        <div class="tomato-entry entry">
+          <i class="iconfont icon-clock before"></i>
+          <span class="entry-title"> 25:00 </span>
+          <i class="iconfont icon-chevron-right"></i>
+        </div>
+        <div class="ticktick-entry entry" @click="clockWrapDisplay = true">
+          <i class="iconfont icon-circle-check before"></i>
+          <span class="entry-title"> 滴答清单 </span>
+          <i class="iconfont icon-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+    </transition>
+    
   </div>
 </template>
 <script>
 import EmbedFrame from "@/components/EmbedFrame";
+import ClockBox from '@/components/ClockBox.vue';
+import CalendarBox from '@/components/CalendarBox.vue';
 export default {
   props: ["bgEnable"],
   name: "BigClock",
   components: {
     EmbedFrame,
+    ClockBox,
+    CalendarBox,
   },
   data() {
     return {
@@ -46,6 +75,7 @@ export default {
       },
       currentDate: new Date(),
       bgStatus: true,
+      clockWrapDisplay: false,
     };
   },
   methods: {
@@ -101,18 +131,40 @@ export default {
 };
 </script>
 <style>
+.trans-enter-active {
+  transition: all 0.15s cubic-bezier(0.36, 0.13, 0.04, 1);
+}
+
+.trans-leave-active {
+  transition: all 0.1s cubic-bezier(0.43, 0.2, 0.86, 0.88);
+  /* transition-delay: 200ms; */
+}
+
+.trans-enter,
+.trans-leave-to {
+  /* background: transparent; */
+  transform: translateY(100vh);
+  opacity: 0;
+  /* backdrop-filter: blur(10px); */
+}
 :root {
   --wrap-gap: 10px;
 }
 #big-clock {
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  overflow: scroll;
+  user-select: none;
+}
+#big-clock-content {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: var(--elem-color-dark);
 }
-
 #big-clock-time {
   display: flex;
   align-items: baseline;
@@ -133,7 +185,7 @@ export default {
 #big-clock-time-content,
 #big-clock-twelve-label,
 #big-clock-week {
-  color: var(--main-color);
+  color: var(--main-color-dark);
   margin-left: 5px;
   /* text-shadow: 0 5px 10px #00000083; */
 }
@@ -144,5 +196,52 @@ export default {
 #big-clock-twelve-label {
   font-size: 40px;
   font-weight: 800;
+}
+.entries {
+  color: var(--main-color-dark);
+  display: flex;
+}
+.entries .entry {
+  padding: 10px 5px;
+  background: var(--bg-color-dark);
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  transition: background-color .2s ease;
+}
+.entries .entry:active{
+  background: var(--accent-color);
+
+}
+.entries .entry .iconfont {
+  font-size: 20px;
+  margin: 0 4px;
+}
+.entries .entry .before {
+  margin-right: 6px;
+}
+.big-clock-ticktick {
+  background: #fff;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+.ticktick-func{
+  width: 100px;
+  height: 100vh;
+  background: var(--second-assist-color);
+}
+.ticktick-func i{
+  display: block;
+  font-size: 30px;
+  margin: 20px 0 10px 20px;
+  /* background: #a00; */
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+.ticktick-func i:active{
+  background: var(--second-assist-color);
 }
 </style>
