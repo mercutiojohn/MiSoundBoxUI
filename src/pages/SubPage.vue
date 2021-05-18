@@ -96,10 +96,11 @@ export default {
 .sub-page .swiper-slide{
   height: 100vh;
   overflow: hidden;
+  transition: all .2s ease;
+
 }
 .sub-page .swiper-slide-prev,.sub-page .swiper-slide-next {
   border-radius: 40px;
   transform: scale(0.86);
-
 }
 </style>

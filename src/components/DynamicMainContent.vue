@@ -174,7 +174,6 @@ export default {
   }
   .dynamic-left-background {
     min-height: calc(100vh - 64px);
-
   }
   .dynamic-right {
     width: 100%;

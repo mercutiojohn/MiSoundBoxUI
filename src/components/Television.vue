@@ -128,13 +128,19 @@ export default {
 .television {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000;
 }
 #videoElement {
   width: 100%;
   height: 100%;
 }
 .television .poster {
-  width: 100%;
+  width:100%;
+  height: 100%;
   transition: opacity 0.2s ease;
   cursor: pointer;
   transition: filter 0.2s ease;
@@ -142,7 +148,10 @@ export default {
 
 .television .poster img {
   filter: brightness(60%);
+  transition:all .2s ease;
   width: 100%;
+  height: 100%;
+  object-fit:cover;
 }
 .television .poster img:active {
   filter: brightness(100%);
@@ -176,6 +185,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all .2s cubic-bezier(0.25, 0.1, 0, 1.46);
+}
+.play-button:active{
+  transform:scale(2);
 }
 .play-button i{
   font-size: 30px;

@@ -18,6 +18,7 @@
     --main-color-dark: #ffffff;
     --body-color: #f1f3f4;
     --inactive-color: #888;
+    --inactive-color-dark: #ddd;
     --second-main-color: #888;
     --search-padding: 500px;
     --blur-color: var(--blur-color-light);

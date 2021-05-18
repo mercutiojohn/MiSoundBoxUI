@@ -189,7 +189,7 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="css" scoped>
 .trans-enter-active {
   transition: all 0.15s cubic-bezier(0.36, 0.13, 0.04, 1);
 }

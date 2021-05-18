@@ -1,23 +1,23 @@
 <template>
   <div id="all">
-    <!-- <swiper :options="swiperOption"> -->
-      <!-- <swiper-slide> -->
+    <swiper :options="swiperOption">
+      <swiper-slide>
         <div class="main-page">
           <HeaderBar />
           <!-- <div id="fake"></div>  -->
-          <!-- <transition name="fade" mode="out-in"> -->
+          <transition name="fade" mode="out-in">
             <!-- <keep-alive> -->
             <router-view></router-view>
             <!-- </keep-alive> -->
-          <!-- </transition> -->
+          </transition>
           <!-- <Course /> -->
         </div>
-      <!-- </swiper-slide> -->
-      <!-- <swiper-slide> -->
+      </swiper-slide>
+      <swiper-slide>
         <SubPage />
-      <!-- </swiper-slide> -->
+      </swiper-slide>
       <!-- <swiper-slide class=""></swiper-slide> -->
-    <!-- </swiper> -->
+    </swiper>
   </div>
 </template>
 <script>
@@ -41,10 +41,12 @@ export default {
     return {
       swiperOption: {
         direction: "vertical",
-        slidesPerView: 1,
-        // autoHeight: true
+        slidesPerView: 'auto',
+        autoHeight: true,
         spaceBetween: 0,
-        loop: true,
+        loop: false,
+        observer: true, //修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true, //修改swiper的父元素时，自动初始化swiper
       },
     };
   },

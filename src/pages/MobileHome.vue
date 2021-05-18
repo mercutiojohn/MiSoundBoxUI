@@ -99,6 +99,7 @@ export default {
         keyboard: {
           enabled: true,
         },
+        autoHeight:false
       },
     };
   },
@@ -204,11 +205,15 @@ body {
 .disable-scroll {
   overflow: hidden;
 }
-.swiper-slide {
+#mobile .swiper-slide {
   transition: all 0.2s ease;
+  height:100%!important;
 }
 
-.swiper-slide-prev {
-  /* transform: scale(0.86); */
+#mobile .swiper-slide-prev {
+  transform: scale(0.86);
+}
+#mobile .swiper-wrapper{
+  /* height:100vh!important; */
 }
 </style>
