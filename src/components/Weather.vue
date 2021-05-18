@@ -113,6 +113,7 @@ export default {
         // },
       ],
       warningLookup: false,
+      timer:''
     };
   },
   computed: {},
@@ -224,10 +225,13 @@ export default {
   },
   created() {},
   mounted() {
-    this.searchWeather();
     if (localStorage.weather_city)
       this.city = localStorage.weather_city;
-    
+    this.searchWeather();
+    let _this = this;
+    this.timer = setInterval(()=>{
+      _this.searchWeather();
+    },3600000);
   },
   beforeDestroy() {},
 };

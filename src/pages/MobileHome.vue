@@ -9,17 +9,17 @@
         </swiper-slide>
         <swiper-slide class="force-width fake-margin oline">
           <div class="mobile-tool-item mobile-tool-item-gel">
+            <Weibo />
+          </div>
+        </swiper-slide>
+        <swiper-slide class="force-width fake-margin oline">
+          <div class="mobile-tool-item mobile-tool-item-gel">
             <Weather />
           </div>
         </swiper-slide>
         <swiper-slide class="force-width fake-margin oline">
           <div class="mobile-tool-item mobile-tool-item-gel">
             <Countdown />
-          </div>
-        </swiper-slide>
-        <swiper-slide class="force-width fake-margin oline">
-          <div class="mobile-tool-item mobile-tool-item-gel">
-            <Weather />
           </div>
         </swiper-slide>
         <swiper-slide class="force-width fake-margin oline">
@@ -32,11 +32,7 @@
             <BiliRecommend />
           </div>
         </swiper-slide>
-        <swiper-slide class="force-width fake-margin oline">
-          <div class="mobile-tool-item mobile-tool-item-gel">
-            <Weibo />
-          </div>
-        </swiper-slide>
+        
         <swiper-slide class="first-width fake-margin oline">
           <div class="mobile-tool-item first-width">
             <Television />
@@ -205,15 +201,15 @@ body {
 .disable-scroll {
   overflow: hidden;
 }
-#mobile .swiper-slide {
+.mobile-tools-list>.swiper-container>.swiper-wrapper>.swiper-slide {
   transition: all 0.2s ease;
   height:100%!important;
 }
 
-#mobile .swiper-slide-prev {
+.mobile-tools-list>.swiper-container>.swiper-wrapper>.swiper-slide-prev {
   transform: scale(0.86);
 }
-#mobile .swiper-wrapper{
+.mobile-tools-list>.swiper-container>.swiper-wrapper{
   /* height:100vh!important; */
 }
 </style>

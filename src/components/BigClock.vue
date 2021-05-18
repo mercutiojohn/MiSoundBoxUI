@@ -344,6 +344,6 @@ export default {
   /* transform:translateY(-20px); */
   font-size: 25px;
   padding: 10px 0;
-  font-weight: 300;
+  /* font-weight: 300;*/
 }
 </style>
